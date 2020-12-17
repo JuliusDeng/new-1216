@@ -399,7 +399,7 @@
           }
           return null
         }
-        
+        console.log("cpid:", this.cp_id);
         // 直接请求
         if (this.hasLogin) {
           this.$u.get('/api/store/product/getPowerCouponProjectDetail', {

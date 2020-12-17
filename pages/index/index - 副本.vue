@@ -29,17 +29,16 @@
 			<view class="grid-box">
 				<u-grid :col="4" :border="false">
 					<u-grid-item v-for="(item, index) in gridList" :key="index" @click="toRoute({
-						  url: item.url,
-						  params: {
-							title: item.name
-						  }
-						})">
+              url: item.url,
+              params: {
+                title: item.name
+              }
+            })">
 						<u-icon :name="item.pic" :size="56"></u-icon>
 						<view class="grid-text">{{ item.name }}</view>
 					</u-grid-item>
 				</u-grid>
 			</view>
-
 			<!-- 今日商品秒杀 -->
 			<view class="new-goods" v-if="nowStep > -1 && footMoreList[0].length">
 				<view class="title-box">
@@ -70,52 +69,51 @@
 				<view class="title-box">
 					<view class="line line-top"></view>
 					<text>⭐️ 天天爱抽奖</text>
-					<view class="sk-more" @click="toRoute({
-						  url: lottery.url,
-						  params: {
-							title: lottery.name
-						  }
-						})">
-						<view>
+					<view class="sk-more">
+						<navigator url="../goods/seckill">
 							查看更多<u-icon name="arrow-right" size="24"></u-icon>
-						</view>
+						</navigator>
 					</view>
 				</view>
 				<view class="mx-2 py-2 shadow-nom ">
 					<view class="position-relative ">
-						<image :src="lotteryDetail.image" style="height: 390rpx;width: 710rpx;" class="d-block"></image>
-						<view class="font-25 position-absolute right-0 bottom-0 d-flex a-center j-center rounded-top-left text-white"
-						 style="background-color: rgba(19,14,11,0.6);width: 250rpx;height: 50rpx;">
-							{{lotteryDetail.mer_name}} 赞助
+						<image src="/static/topbg.jpg" style="height: 390rpx;width: 710rpx;" class="d-block"></image>
+						<view class="font-25 position-absolute right-0 bottom-0 d-flex a-center j-center rounded-top-left text-white" 
+						style="background-color: rgba(19,14,11,0.6);width: 250rpx;height: 50rpx;">
+							泰俊.泰式小火锅 赞助
 						</view>
 					</view>
-
+					
 					<!-- 图下文字 -->
 					<view class="mx-1">
-						<view class="text-elli-two w-100">{{lotteryDetail.store_name}}</view>
+						<view class="text-elli-two w-100">{{textElli}}</view>
 						<view class="mt-1">
 							<text class="text-red font-20">价值</text>
-							<text class="text-red font-30 ml-1">￥{{lotteryDetail.coupon_price}}</text>
+							<text class="text-red font-30 ml-1">￥396.00</text>
 						</view>
 						<view class="d-flex j-sb my-2">
 							<view class="text-light-muted font-20">
-								<text>{{lotteryDetail.activite_endtime}}</text>
-								<text class="ml-1">{{lotteryDetail.title}}</text>
+								<text>2020-12-16</text>
+								<text class="ml-1">20:00</text>
+								<text class="ml-1">自动开奖</text>
 							</view>
 							<view class="text-light-muted font-20">
-								{{lotteryDetail.join_people}}人已参与
+								1677人已参与
 							</view>
 						</view>
 					</view>
 				</view>
 			</view>
 
-			<!--  广告图1 2张 商圈查看 -->
-			<view class="mx-2 my-4">
-				<image :src="hot[0].pic" style="width: 710rpx;height: 430rpx;" class="rounded"></image>
-				<!-- <image src="../../static/logo.png" style="width: 340rpx;height: 430rpx;" class="rounded"></image> -->
+			<!-- 广告图 商圈查看 -->
+			<view class="mx-2 my-4 d-flex j-sb">
+				<image src="../../static/logo.png" style="width: 340rpx;height: 430rpx;"
+				class="rounded"></image>
+				<image src="../../static/logo.png" style="width: 340rpx;height: 430rpx;"
+				class="rounded"></image>
 			</view>
-
+			
+			
 			<!-- 吃喝玩乐推荐 card swiper -->
 			<view class="card-swiper">
 				<view class="card-top">
@@ -131,58 +129,56 @@
 					</view>
 				</view>
 				<!-- 轮播图 -->
-				<swiper :indicator-dots="false" :autoplay="true" :interval="3000" :duration="1000" :circular="true" :current="cardSwiper"
-				 @change="changeCardSwiper" style="height: 520rpx;">
-					<swiper-item v-for="(item, index) in footMoreList[1]" :key="index" class="mx-2 rounded-8">
-						<image :src="item.image" class="rounded-8" style="width: 710rpx; height: 330rpx;"></image>
+				<swiper :indicator-dots="false" :autoplay="true" :interval="3000" :duration="1000" 
+				:circular="true" :current="cardSwiper" @change="changeCardSwiper"
+				style="height: 520rpx;">
+					<swiper-item v-for="(item, index) in footMoreList[1]" :key="index" 
+					 class="mx-2 rounded-8"  @click="toRoute({
+					url: 'pages/goods/details',
+					params: {
+					  id: item.product_id
+					}
+				  })">
+						<image :src="item.image"
+						class="rounded-8" style="width: 710rpx; height: 330rpx;"></image>
 						<!-- 图下文字 -->
 						<view class="" style="width: 710rpx;">
-							<text class="text-elli-two my-1">{{ item.store_info}}</text>
+							<text class="text-elli-two my-1">{{textElli}}</text>
 							<view class="d-flex j-sb a-center">
 								<!-- 左侧 -->
 								<view class="my-1">
-									<member>会员省{{ (item.price - item.vip_price).toFixed(2) }}元</member>
+									<member>会员省2元</member>
 									<view class="d-flex font-20 mt-1">
-										<text class="text-red font-700 font-25 mx-1">￥{{item.price}}</text>
-										<text class="text-red-light" v-if="item.spec_type">起</text>
-										<text class="text-through text-muted mr-1">￥{{item.ot_price}}</text>
+										<text class="text-red font-700 font-25 mx-1">￥68.80</text>
+										<!-- <text  class="text-red-light ">起</text> -->
+										<text class="text-through text-muted mr-1">￥100.80</text>
 										<!-- css写左箭头 -->
-										<arrow>{{ ((item.price / item.ot_price) * 10).toFixed(1)  }}折</arrow>
+										<arrow>4.8折</arrow>
 									</view>
 								</view>
 								<!-- 右侧 -->
-								<view @click="toRoute({
-									url: 'pages/goods/details',
-									params: {
-									  id: item.product_id
-									}
-								  })">
-									<bottom-buy>立即购买</bottom-buy>
-								</view>
+								<bottom-buy>立即购买</bottom-buy>
 							</view>
 						</view>
-
+						
 					</swiper-item>
 				</swiper>
-
+				
 			</view>
-
-			<!-- 广告图2 轮播广告图 -->
-			<!-- <swiper :indicator-dots="false" :autoplay="false" :interval="3000" :duration="1000" :circular="true">
+			
+			<!-- 轮播广告图 -->
+			<swiper :indicator-dots="false" :autoplay="false" :interval="3000" :duration="1000" :circular="true">
 				<swiper-item style="height: 360rpx;">
-					<image src="/static/topbg.jpg" style="height: 360rpx;width: 710rpx;" class="d-block mx-2"></image>
+					<image src="/static/topbg.jpg" style="height: 360rpx;width: 710rpx;" 
+					class="d-block mx-2"></image>
 				</swiper-item>
 				<swiper-item class=" " style="height: 360rpx;">
 					<image src="/static/tran.png" style="height: 360rpx;width: 710rpx;" class="d-block mx-2 border"></image>
 				</swiper-item>
-			</swiper> -->
-			<view class="mx-2 my-1">
-				<image :src="hot[1].pic" style="width: 710rpx;height: 360rpx;" class="rounded"></image>
-			</view>
-
-
+			</swiper>
+			
 			<!-- 必吃美食|优选Top -->
-			<view class="goods-list" v-if="nowStep > 1">
+			<view class="goods-list" v-if="nowStep > 2">
 				<view class="title-box">
 					<view class="line line-top" style="width: 370rpx;"></view>
 					<text>⭐️ 必吃美食|优选Top</text>
@@ -193,59 +189,40 @@
 						isvip: '1'
 					  }
 					})">
-						<text>更多推荐</text>
-						<u-icon name="arrow-right" size="24"></u-icon>
+						<text>更多推荐</text><u-icon name="arrow-right" size="24"></u-icon>
 					</view>
 				</view>
-
+				
 				<!-- 内容 -->
 				<view class="mx-2 p-2  shadow rounded-8 " style="width: 710rpx;">
-					<view class="d-flex j-sb mb-2" v-for="(item, index) in footMoreList[2]" :key="index">
+					<view class="d-flex j-sb mb-2" v-for="i in 5" :key="i">
 						<!-- 左图 -->
-						<image :src="item.image" style="width: 220rpx;height: 220rpx;"></image>
+						<image src="../../static/logo.png" style="width: 220rpx;height: 220rpx;"></image>
 						<!-- 右侧 -->
 						<view class="d-flex flex-column j-sb" style="width: 420rpx;">
 							<view>
-								<view class="text-elli-two">{{item.store_info}}</view>
-								<arrow mtop="mt-1">{{ ((item.price / item.ot_price) * 10).toFixed(1)  }}折</arrow>
+								<view class="text-elli-two">{{textElli}}</view>
+								<arrow mtop="mt-1">6.8折</arrow>
 							</view>
-
+							
 							<view class="d-flex j-sb ">
 								<view class="">
-									<member>会员省{{ (item.price - item.vip_price).toFixed(2) }}元</member>
-									<text class="text-red font-700 font-25 mx-1">￥{{item.price}}</text>
-									<text class="text-red-light" v-if="item.spec_type">起</text>
+									<member>会员省2元</member>
+									<text class="text-red font-700 font-25 mx-1">￥159.00</text>
 								</view>
-								<view @click="toRoute({
-									url: 'pages/goods/details',
-									params: {
-									  id: item.product_id
-									}
-								  })">
-									<bottom-buy>立即购买</bottom-buy>
-								</view>
+								<bottom-buy>立即购买</bottom-buy>
 							</view>
-
-
+							
+							
 						</view>
-
+						
 					</view>
-
-
-
+					
+					
+					
 				</view>
 			</view>
-
-			 <!-- 广告3 -->
-			<view class="mx-2 my-3">
-				<image :src="hot[2].pic" style="width: 710rpx;height: 260rpx;" 
-				class="rounded"></image>
-			</view>
-			<!-- 广告4 -->
-			<view class="mx-2 mb-3">
-				<image :src="hot[3].pic" style="width: 710rpx;height: 430rpx;" 
-				class="rounded"></image>
-			</view>
+			
 			
 			<!-- 网红风味|吃货必备 本周上新 -->
 			<view class="goods-list" v-if="nowStep > 2">
@@ -255,12 +232,11 @@
 					<view class="secmore" @click="toRoute({
 					  url: 'pages/goods/list', 
 					  params: {
-						pid: '314',
-						title: '网红风味|吃货必备',
+						title: '➡️向右滑动查看',
+						isvip: '1'
 					  }
 					})">
-						<text>向右滑动查看</text>
-						<u-icon name="arrow-right" size="24"></u-icon>
+						<text>向右滑动查看</text><u-icon name="arrow-right" size="24"></u-icon>
 					</view>
 				</view>
 				<scroll-view scroll-x="true">
@@ -272,21 +248,20 @@
 					</view>
 				</scroll-view>
 			</view>
-
+			
 			<!-- 火锅|一起涮火锅 本周上新 -->
 			<view class="goods-list" v-if="nowStep > 3">
 				<view class="title-box">
 					<view class="line line-top" style="width: 330rpx;"></view>
 					<text>⭐️ 火锅|一起涮火锅</text>
 					<view class="secmore" @click="toRoute({
-					  url: 'pages/goods/list', 
+					  url: '？？？', 
 					  params: {
 						title: '➡️向右滑动查看',
 						isvip: '1'
 					  }
 					})">
-						<text>向右滑动查看</text>
-						<u-icon name="arrow-right" size="24"></u-icon>
+						<text>向右滑动查看</text><u-icon name="arrow-right" size="24"></u-icon>
 					</view>
 				</view>
 				<scroll-view scroll-x="true">
@@ -298,7 +273,7 @@
 					</view>
 				</scroll-view>
 			</view>
-
+			
 			<!-- 烤肉|烤鱼|烧烤吃不腻 本周上新 -->
 			<view class="goods-list" v-if="nowStep > 4">
 				<view class="title-box">
@@ -312,8 +287,7 @@
 						isvip: '1'
 					  }
 					})">
-						<text>向右滑动查看</text>
-						<u-icon name="arrow-right" size="24"></u-icon>
+						<text>向右滑动查看</text><u-icon name="arrow-right" size="24"></u-icon>
 					</view>
 				</view>
 				<scroll-view scroll-x="true">
@@ -325,14 +299,10 @@
 					</view>
 				</scroll-view>
 			</view>
-
-			<!-- 广告5 -->
-			<!-- <view class="advint" v-if="nowStep > 4 && ad.home_ad_pic" @click="toRoute({url: ad.home_ad_url})">
+			
+			<!-- 广告 -->
+			<view class="advint" v-if="nowStep > 4 && ad.home_ad_pic" @click="toRoute({url: ad.home_ad_url})">
 				<u-image :src="ad.home_ad_pic" width="100%" height="400rpx"></u-image>
-			</view> -->
-			<view class="mx-2 mb-3">
-				<image :src="hot[4].pic" style="width: 710rpx;height: 430rpx;" 
-				class="rounded"></image>
 			</view>
 
 			<!-- 玩乐优惠专区 -->
@@ -347,17 +317,17 @@
 						isvip: '1'
 					  }
 					})">
-						<text>更多推荐</text>
-						<u-icon name="arrow-right" size="24"></u-icon>
+						<text>更多推荐</text><u-icon name="arrow-right" size="24"></u-icon>
 					</view>
 				</view>
 				<!-- 玩乐优惠专区内容 -->
 				<view class="px-2 border-bottom d-flex j-sb flex-wrap">
 					<!-- 750-40=710-660=50 -->
-					<view class="border-bottom" style="width: 330rpx;height: 400rpx;" v-for="i in 5" :key="i">
+					<view class="border-bottom" style="width: 330rpx;height: 400rpx;"
+					v-for="i in 5" :key="i">
 						<image src="/static/logo.png" style="width: 220rpx;height: 220rpx;"></image>
 						<view class="text-elli-two">{{textElli}}</view>
-
+						
 						<view class="d-flex j-sb ">
 							<view>
 								<member mtop="mt-1">会员省2元</member>
@@ -368,8 +338,8 @@
 					</view>
 				</view>
 			</view>
-
-
+			
+			
 			<!-- 底部技术支持栏 foot logo -->
 			<view class="logo-box" v-if="indexLoadStatus == 'nomore'">
 				<text class="text">{{ baseInfo.site_name }}技术支持</text>
@@ -391,7 +361,7 @@
 				<u-loadmore :status="loadStatus"></u-loadmore>
 			</view>
 		</template>
-
+		
 	</view>
 </template>
 
@@ -399,7 +369,7 @@
 	import Arrow from '@/components/index/arrow.vue';
 	import Member from '@/components/index/member.vue';
 	import BottomBuy from '@/components/index/bottom-buy.vue';
-
+	
 	const appSystem = uni.getSystemInfoSync()
 	export default {
 		components: {
@@ -410,7 +380,11 @@
 		data() {
 			return {
 				textElli: "【美颜美体.云景清吧】就是打开了司法鉴定所冷风机SDK就发对抗赛垃圾房东说开了房间的思考了第三方极乐迪斯科附近的抗衰老减肥的说的",
-				hot: [],
+				hotMoreGrid: [{
+					text: '爆品专区',
+					image: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1021385598,3332745907&fm=15&gp=0.jpg',
+					path: 'pages/goods/list?hot_type=hot'
+				}],
 				showReindex: true,
 				tabsList: [{
 					cate_name: '推荐'
@@ -430,11 +404,7 @@
 				footMoreList: [],
 				datatime: 0,
 				init: true,
-				ad: {},
-				// 抽奖
-				lottery: "",
-				lotteryDetail: "",
-
+				ad: {}
 			}
 		},
 		computed: {
@@ -459,7 +429,6 @@
 				this.getFootMore()
 			}
 			this.getSeckillTime()
-			this.showLottery()
 		},
 		onReachBottom() {
 			if (!this.tabsCurrent) { // 首页index
@@ -494,24 +463,24 @@
 				let limit = 4
 				let params = {}
 				switch (this.nowStep) {
-					case -1: // 1 秒杀
+					case -1: // 秒杀
 						url = '/api/store/product/seckill/lst'
 						break;
-					case 0: // 2 吃喝玩乐推荐
+					case 0: // 吃喝玩乐推荐
 						url = '/api/store/product/lst'
 						params.hot_type = 'good'
 						break;
-					case 1: // 3 必吃美食（同2）
+					case 1:
 						url = '/api/store/product/lst'
 						params.isvip = '1'
 						break;
-					case 2: // 4 本周上新 ?网红风味
+					case 2: // 本周上新
 						url = '/api/store/product/lst'
 						params.cate_id = 314
 						// params.hot_type = 'new'
 						limit = 10
 						break;
-					case 3: // 5 火锅
+					case 3: // 火锅
 						url = '/api/store/product/lst'
 						params.hot_type = 'new'
 						limit = 10
@@ -519,7 +488,7 @@
 						// this.getFootMore()
 						// return null;
 						break;
-					case 4: // 6 烧烤
+					case 4: // 烧烤
 						url = '/api/store/product/lst'
 						params.hot_type = 'new'
 						limit = 10
@@ -541,9 +510,7 @@
 				}).then(({
 					data
 				}) => {
-					// nowStep默认值为 -1
 					this.nowStep++
-					console.log(`获取推荐商品${this.nowStep}:`, data.list);
 					this.footMoreList[this.nowStep] = data.list
 					if (this.nowStep > 6) {
 						this.indexLoadStatus = 'nomore'
@@ -577,8 +544,7 @@
 					})
 				}
 			},
-
-			// ** 获取首页数据
+			// 获取首页数据
 			getIndexData() {
 				this.$u.get('/api/common/home')
 					.then(({
@@ -587,15 +553,11 @@
 						this.ad = data.ad
 						this.banner = data.banner
 						// this.recommendList = data.hot
-						this.hot = data.hot
+						this.hotMoreGrid = data.hot
 						this.tabsList = this.tabsList.concat(data.category)
 						this.gridList = this.gridList.concat(data.menu)
-						this.lottery = data.menu[0]
-						console.log("gridList:", this.gridList);
-						console.log("lottery:", this.lottery);
 					})
 			},
-
 			// banner 点击跳转对应页面
 			toSwiperPath(index) {
 				let url = this.banner[index].url
@@ -626,33 +588,19 @@
 			// swiper banner 切换
 			changeSwiper(index) {
 				this.swiperCurrent = index
-			},
-
-			// 11天天爱抽奖
-			showLottery() {
-				this.$u.get('/api/store/product/getCouponProjectList', {
-					page: 1,
-					limit: 1
-				}).then(res => {
-					console.log(res);
-					this.lotteryDetail = res.data.list[0];
-				});
 			}
-
-
-
-
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
+	
 	/*公共样式 */
 	// @import "/common/common.css";
 	/*自定义UI库 */
 	@import "/common/dev-yuchen.css";
-
-
+	
+	
 	.search {
 		padding-right: 50rpx;
 		display: flex;
