@@ -9,20 +9,14 @@
           })"></u-search>
 			</view>
 		</u-navbar>
-		<!-- tips 添加至我的小程序-->
+		<!-- tips -->
 		<struggler-uniapp-add-tip></struggler-uniapp-add-tip>
-		<!-- 顶部选项卡 tabs -->
-		<!-- <u-sticky :offset-top="offsetTop">
+		<!-- tabs -->
+		<u-sticky :offset-top="offsetTop">
 			<view class="tabs">
 				<u-tabs name="cate_name" :list="tabsList" :current="tabsCurrent" @change="tabsChange"></u-tabs>
 			</view>
-		</u-sticky> -->
-		<view class="position-fixed" style="top: 140rpx;height: 80rpx;z-index: 99;" >
-			<u-tabs name="cate_name" :list="tabsList" :current="tabsCurrent" @change="tabsChange"></u-tabs>
-		</view>
-		<view class="bg-yellow" style="height: 80rpx;"></view>
-			
-		
+		</u-sticky>
 		<!-- top -->
 		<view class="top-box">
 			<image src="/static/topbg.jpg" mode="aspectFill" class="image"></image>

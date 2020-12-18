@@ -1,9 +1,9 @@
 <template>
-	<view  class="d-flex font-20" :class="mtop">
+	<view  class="d-flex a-center font-20" :class="mtop">
 		<view class="text-red-light" style="
 		width: 0;
 		height: 0;
-		border: 5px solid #fee9eb;
+		border: 10px solid #fee9eb;
 		border-color: transparent  #fee9eb transparent  transparent ;
 		z-index: 99;
 		"></view>
