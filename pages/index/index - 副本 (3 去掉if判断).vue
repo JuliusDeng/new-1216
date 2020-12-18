@@ -190,7 +190,7 @@
 
 
 			<!-- 必吃美食|优选Top -->
-			<view class="goods-list" >
+			<view class="goods-list"  v-if="nowStep > 1">
 				<view class="title-box">
 					<view class="line line-top" style="width: 370rpx;"></view>
 					<text>⭐️ 必吃美食|优选Top</text>
@@ -198,7 +198,7 @@
 					  url: 'pages/goods/list', 
 					  params: {
 						title: '必吃美食|优选Top',
-						hot_type: 'good'
+						hot_type: 'good '
 					  }
 					})">
 						<text>更多推荐</text>
@@ -256,7 +256,7 @@
 			</view>
 			
 			<!-- 网红风味|吃货必备 本周上新 -->
-			<view class="goods-list" >
+			<view class="goods-list" v-if="nowStep > 2">
 				<view class="title-box">
 					<view class="line line-top" style="width: 370rpx;"></view>
 					<text>⭐️ 网红风味|吃货必备</text>
@@ -282,7 +282,7 @@
 			</view>
 
 			<!-- 火锅|一起涮火锅 本周上新 -->
-			<view class="goods-list" v-if="footMoreList[4].length > 0">
+			<view class="goods-list" v-if="nowStep > 3">
 				<view class="title-box">
 					<view class="line line-top" style="width: 330rpx;"></view>
 					<text>⭐️ 火锅|一起涮火锅</text>
@@ -308,7 +308,7 @@
 			</view>
 
 			<!-- 烤肉|烤鱼|烧烤吃不腻 本周上新 -->
-			<view class="goods-list" v-if="footMoreList[5].length > 0">
+			<view class="goods-list" v-if="nowStep > 4">
 				<view class="title-box">
 					<!-- <image src="/static/ico-star.png" mode="aspectFit" class="ico-star"></image> -->
 					<view class="line line-top" style="width: 410rpx;"></view>
@@ -346,23 +346,23 @@
 				<image src="../../static/topbg.jpg" style="width: 710rpx;height: 430rpx;" class="rounded"></image>
 			</view>
 
-			<!-- 玩乐特惠专区 -->
+			<!-- 玩乐优惠专区 -->
 			<view class="goods-list" >
 				<view class="title-box">
 					<view class="line line-top" style="width: 410rpx;"></view>
-					<text>⭐️ 玩乐特惠专区</text>
+					<text>⭐️ 玩乐优惠专区</text>
 					<view class="secmore" @click="toRoute({
 					  url: 'pages/goods/list',
 					  params: {
-					  title: '玩乐特惠专区',
-					  hot_type: 'good'
+					  title: '玩乐优惠专区',
+					  hot_type: 'good '
 					  }
 					})">
 						<text>更多推荐</text>
 						<u-icon name="arrow-right" size="24"></u-icon>
 					</view>
 				</view>
-				<!-- 玩乐特惠专区内容 -->
+				<!-- 玩乐优惠专区内容 -->
 				<view class="px-2 d-flex j-sb flex-wrap">
 					<!-- 750-40=710-660=50 -->
 					<view class="mb-2" style="width: 340rpx;height: 400rpx;" 
@@ -384,145 +384,6 @@
 					</view>
 				</view>
 			</view>
-			
-			<!-- 广告7 -->
-			<view class="mx-2 mb-3">
-				<image src="../../static/topbg.jpg" style="width: 710rpx;height: 430rpx;" class="rounded"></image>
-			</view>
-			
-			<!-- 丽人美容|气质小仙女 -->
-			<view class="goods-list" >
-				<view class="title-box">
-					<view class="line line-top" style="width: 410rpx;"></view>
-					<text>⭐️ 丽人美容|气质小仙女</text>
-					<view class="secmore" @click="toRoute({
-					  url: 'pages/goods/list',
-					  params: {
-					  title: '丽人美容|气质小仙女',
-					  hot_type: 'good'
-					  }
-					})">
-						<text>更多推荐</text>
-						<u-icon name="arrow-right" size="24"></u-icon>
-					</view>
-				</view>
-				<!-- 丽人美容|气质小仙女 内容 -->
-				<view class="px-2 d-flex j-sb flex-wrap">
-					<!-- 750-40=710-660=50 -->
-					<view class="mb-2" style="width: 340rpx;height: 400rpx;" 
-					v-for="(item, index) in footMoreList[2]" :key="index" @click="toRoute({
-						url: 'pages/goods/details',
-						params: {
-						  id: item.product_id
-						}
-					})">
-						<image :src="item.image" style="width: 340rpx;height: 220rpx;"></image>
-						<view class="text-elli-two">{{item.store_info}}</view>
-					
-						<view class="d-flex j-sb ">
-							<view>
-								<member v-if="item.vip_price">会员省{{ (item.price - item.vip_price).toFixed(2) }}元</member>
-								<text class="text-red font-700 font-25 mx-1">￥{{item.price}}</text>
-							</view>
-						</view>
-					</view>
-				</view>
-			</view>
-			
-			<!-- 广告8 -->
-			<view class="mx-2 mb-3">
-				<image src="../../static/topbg.jpg" style="width: 710rpx;height: 430rpx;" class="rounded"></image>
-			</view>
-			
-			<!-- 生活服务类专区 -->
-			<view class="goods-list" >
-				<view class="title-box">
-					<view class="line line-top" style="width: 410rpx;"></view>
-					<text>⭐️ 生活服务类专区</text>
-					<view class="secmore" @click="toRoute({
-					  url: 'pages/goods/list',
-					  params: {
-					  title: '生活服务类专区',
-					  hot_type: 'good'
-					  }
-					})">
-						<text>更多推荐</text>
-						<u-icon name="arrow-right" size="24"></u-icon>
-					</view>
-				</view>
-				<!-- 生活服务类专区 内容 -->
-				<view class="px-2 d-flex j-sb flex-wrap">
-					<!-- 750-40=710-660=50 -->
-					<view class="mb-2" style="width: 340rpx;height: 400rpx;" 
-					v-for="(item, index) in footMoreList[2]" :key="index" @click="toRoute({
-						url: 'pages/goods/details',
-						params: {
-						  id: item.product_id
-						}
-					})">
-						<image :src="item.image" style="width: 340rpx;height: 220rpx;"></image>
-						<view class="text-elli-two">{{item.store_info}}</view>
-					
-						<view class="d-flex j-sb ">
-							<view>
-								<member v-if="item.vip_price">会员省{{ (item.price - item.vip_price).toFixed(2) }}元</member>
-								<text class="text-red font-700 font-25 mx-1">￥{{item.price}}</text>
-							</view>
-						</view>
-					</view>
-				</view>
-			</view>
-			
-			<!-- 广告9 -->
-			<view class="mx-2 mb-3">
-				<image src="../../static/topbg.jpg" style="width: 710rpx;height: 430rpx;" class="rounded"></image>
-			</view>
-			
-			<!-- 休闲娱乐专区 -->
-			<view class="goods-list" >
-				<view class="title-box">
-					<view class="line line-top" style="width: 410rpx;"></view>
-					<text>⭐️ 休闲娱乐专区</text>
-					<view class="secmore" @click="toRoute({
-					  url: 'pages/goods/list',
-					  params: {
-					  title: '休闲娱乐专区',
-					  hot_type: 'good'
-					  }
-					})">
-						<text>更多推荐</text>
-						<u-icon name="arrow-right" size="24"></u-icon>
-					</view>
-				</view>
-				<!-- 休闲娱乐专区 内容 -->
-				<view class="px-2 d-flex j-sb flex-wrap">
-					<!-- 750-40=710-660=50 -->
-					<view class="mb-2" style="width: 340rpx;height: 400rpx;" 
-					v-for="(item, index) in footMoreList[2]" :key="index" @click="toRoute({
-						url: 'pages/goods/details',
-						params: {
-						  id: item.product_id
-						}
-					})">
-						<image :src="item.image" style="width: 340rpx;height: 220rpx;"></image>
-						<view class="text-elli-two">{{item.store_info}}</view>
-					
-						<view class="d-flex j-sb ">
-							<view>
-								<member v-if="item.vip_price">会员省{{ (item.price - item.vip_price).toFixed(2) }}元</member>
-								<text class="text-red font-700 font-25 mx-1">￥{{item.price}}</text>
-							</view>
-						</view>
-					</view>
-				</view>
-			</view>
-				
-			<!-- 广告10 -->
-			<view class="mx-2 mb-3">
-				<image src="../../static/topbg.jpg" style="width: 710rpx;height: 430rpx;" class="rounded"></image>
-			</view>
-				
-			
 			
 			<!-- 亲子教育 -->
 			<view class="card-swiper">
@@ -577,13 +438,13 @@
 
 
 			<!-- 底部技术支持栏 foot logo -->
-			<view class="logo-box">
+			<view class="logo-box" v-if="indexLoadStatus == 'nomore'">
 				<text class="text">{{ baseInfo.site_name }}技术支持</text>
 			</view>
 			<!-- loadmore -->
-			<!-- <view class="u-padding-20" v-else>
+			<view class="u-padding-20" v-else>
 				<u-loadmore :status="indexLoadStatus"></u-loadmore>
-			</view> -->
+			</view>
 		</template>
 		<template v-else>
 			<view class="goods-inbox">
@@ -662,25 +523,26 @@
 		onLoad() {
 			// 获取数据
 			this.getIndexData()
-			this.getFootMore()
-			// if (this.indexLoadStatus == 'loadmore') {
-			// 	this.indexLoadStatus = 'loading'
-			// 	this.getFootMore()
-			// }
+			if (this.indexLoadStatus == 'loadmore') {
+				this.indexLoadStatus = 'loading'
+				this.getFootMore()
+			}
 			this.getSeckillTime()
 			this.showLottery()
 			
+			// 直接拿到所有数据
+			this.getData()
 		},
-		// onReachBottom() {
-		// 	if (!this.tabsCurrent) { // 首页index
-		// 		if (this.indexLoadStatus == 'loadmore') {
-		// 			this.indexLoadStatus = 'loading'
-		// 			this.getFootMore()
-		// 		}
-		// 	} else { // 列表list
-		// 		this.getList()
-		// 	}
-		// },
+		onReachBottom() {
+			if (!this.tabsCurrent) { // 首页index
+				if (this.indexLoadStatus == 'loadmore') {
+					this.indexLoadStatus = 'loading'
+					this.getFootMore()
+				}
+			} else { // 列表list
+				this.getList()
+			}
+		},
 		methods: {
 			toDetails(item, type = 0, date) {
 				this.toRoute({
@@ -699,13 +561,37 @@
 				});
 			},
 			// 获取推荐商品
+			getData(url, param) {
+				console.log("url参数：", url)
+				console.log("param参数：", param)
+				const urlArr = [
+					{
+						
+					}
+				]
+				this.$u.get(url, {
+					page: 1,
+					limit: 10,
+					hot_type: param,
+					pid: param,
+					isvip: param
+				}).then(({
+					data
+				}) => {
+					console.log(`结束一次：`, data.list);
+					this.dataArr.push(data.list)
+					
+					
+				})
+				
+			},
 			
 			getFootMore() {
 				let url = '/api/store/product/recommend/lst'
 				let limit = 4
 				let params = {}
 				switch (this.nowStep) {
-					case -1: // 1 今日商品秒杀 nowStep默认值为 -1 变0
+					case -1: // 1 今日商品秒杀
 						url = '/api/store/product/seckill/lst'
 						break;
 					case 0: // 2 吃喝玩乐推荐
@@ -715,7 +601,6 @@
 					case 1: // 3 必吃美食 优选top（同2）
 						url = '/api/store/product/lst'
 						params.hot_type = 'good'
-						limit = '10'
 						break;
 					case 2: // 4 本周上新 ?网红风味
 						url = '/api/store/product/lst'
@@ -743,20 +628,7 @@
 						url = '/api/store/product/lst'
 						params.isvip = '1'
 						break;
-					case 5:  // 8 
-						url = '/api/store/product/lst'
-						params.pid  = '313'
-						break;	
-					case 5:  // 9 
-						url = '/api/store/product/lst'
-						params.pid = '316'
-						break;
-					case 5:  // 10 
-						url = '/api/store/product/lst'
-						params.pid = '315'
-						break;
-						
-					case 6: // 11 
+					case 6: // 8 亲子教育
 						url = '/api/store/product/lst'
 						params.hot_type = 'best'
 						break;
@@ -771,30 +643,22 @@
 					data
 				}) => {
 					// nowStep默认值为 -1
+					console.log("index参数：", params)
 					this.nowStep++
 					this.footMoreList[this.nowStep] = data.list
-					// 递归  nowStep默认值为 -1 +1
-					if(this.nowStep < 11) {
-						this.getFootMore()
+					console.log(`获取推荐商品nowStep-1：${this.nowStep-1}:`, data.list);
+					
+					if (this.nowStep > 6) {
+						console.log(`上拉加载666`);
+						this.indexLoadStatus = 'nomore'
 					} else {
-						return false
+						console.log(`上拉加载了nowStep：${this.nowStep}`);
+						this.indexLoadStatus = 'loadmore'
 					}
-					
-					console.log("首页参数：", params)
-					console.log(`获取推荐商品nowStep-1：${this.nowStep-1}:`, data);
-					console.log(`上拉加载了nowStep：${this.nowStep}`);
-					
-					// if (this.nowStep > 6) {
-					// 	console.log(`上拉66了nowStep：${this.nowStep}`);
-					// 	this.indexLoadStatus = 'nomore'
-					// } else {
-						
-					// 	this.indexLoadStatus = 'loadmore'
-					// }
-					// if (this.init) { // init 默认是 true
-					// 	this.init = false
-					// 	this.getFootMore()
-					// }
+					if (this.init) {
+						this.init = false
+						this.getFootMore()
+					}
 				})
 			},
 			// 获取除首页外列表数据

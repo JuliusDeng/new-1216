@@ -41,7 +41,7 @@ body{
     /* box-shadow: 0 8upx 16upx rgba(114, 130, 138, 0.2)!important; */
 }
 .shadow {
-    box-shadow: 0 8upx 16upx rgba(114, 130, 138, 0.2)!important;
+    box-shadow: 0 0 10upx rgba(0, 0, 0, 0.1);
 }
 .shadow-lg {
     box-shadow: 0 16upx 48upx rgba(114, 130, 138, 0.2)!important;

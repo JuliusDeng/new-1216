@@ -6,6 +6,16 @@
         <text class="g-text">{{ title }}</text>
       </view>
     </view>
+	<!-- 会员省 -->
+	<view  class="border-dark d-flex ml-2" :class="mtop" style="width: 180rpx;height: 32rpx; "
+	v-if="vip_price">
+	<!-- <view class="border-dark d-flex " :class="mtop" style="height: 32rpx; ">	 -->
+		<text class="font-20 font-700 d-flex j-center" style="background: #403835;width: 36rpx;color: #efaa89;">V</text>
+		<text class="font-20 text-dark d-flex j-center w-100">
+			会员省{{ (price - vip_price).toFixed(2) }}元
+		</text>
+	</view>
+	
     <view class="goods-price">
       <text class="goods-price-small red">￥</text>
       <text class="goods-price-strong">{{ price }}</text>
@@ -42,6 +52,10 @@
         type: [String, Number],
         default: '0.00'
       },
+	  vip_price: { 
+		  type: [String, Number],
+		  default: '0.00'
+	  },
       showBtn: {
         type: Boolean,
         default: true
@@ -64,7 +78,9 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+	@import "/common/dev-yuchen.css";
+	
 .goods-list-item {
   width: 100%;
   background-color: #fff;

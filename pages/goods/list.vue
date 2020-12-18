@@ -12,7 +12,9 @@
                 id: item.product_id
               }
             })">
-						<goods-item :src="item.image" :title="item.store_name" :price="item.price" :o-price="item.ot_price" :show-btn="false"
+						
+						
+						<goods-item :src="item.image" :title="item.store_name" :price="item.price" :o-price="item.ot_price" :vip_price="item.vip_price" :show-btn="false"
 						 :right-text="`已售 ${item.sales}`">
 						</goods-item>
 					</view>
@@ -49,11 +51,11 @@
 			};
 		},
 		onLoad(options) {
-			console.log("options:",options);
+			console.log("options:", options);
 			this.title = options.title
 			// 增加参数
 			this.pid = options.pid
-			
+
 			this.type = options.type
 			this.isvip = options.isvip
 			this.price_on = options.price_on
@@ -101,6 +103,7 @@
 						data
 					}) => {
 						console.log("参数：", params)
+						console.log("list页返回：", data.list);
 						this.list = this.list.concat(data.list)
 						if (data.list.length < this.limit) {
 							this.loadStatus = 'nomore'
@@ -117,7 +120,8 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" >
+	
 	page {
 		background-color: $bg;
 	}
