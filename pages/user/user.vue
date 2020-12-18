@@ -249,9 +249,13 @@
       
     },
     onShow() {
-      this.walletInfo[0].content = this.userInfo.now_money || '0.00'
-      this.walletInfo[1].content = this.userInfo.pay_price || '0.00'
-      if (this.hasLogin) this.getNums();
+      if (this.hasLogin) {
+        this.getNums()
+        this.getInfo().then(() => {
+          this.walletInfo[0].content = this.userInfo.now_money || '0.00'
+          this.walletInfo[1].content = this.userInfo.pay_price || '0.00'
+        })
+      }
       // if (!this.cheap) {
       //   uni.getStorage({
       //     key: 'memberInfo',
@@ -262,6 +266,18 @@
       // }
     },
     methods: {
+      getInfo () {
+        return new Promise((resolve) => {
+          this.$u.get('/api/user')
+          .then(({ data }) => {
+            this.$store.commit('writeInfo', data)
+            resolve(true)
+          }).catch(() => {
+            this.$store.commit('logOut')
+            resolve(true)
+          })
+        })
+      },
       getNums () {
         this.$u.get('/api/order/number')
         .then(({ data }) => {

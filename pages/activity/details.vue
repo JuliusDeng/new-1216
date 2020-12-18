@@ -70,8 +70,11 @@
             </view>
             <button class="no-text" v-else @click="toDetails">已成功，立即购买</button>
           </view>
-          <view class="card-button" v-else>
+          <view class="card-button" v-else-if="timestamp <= 0">
             <button class="no-text">活动已结束</button>
+          </view>
+          <view class="card-button" v-else @click="onJoinActivity" v-else>
+            <text>立即参与集卡</text>
           </view>
         </template>
         <view v-else>
@@ -399,7 +402,7 @@
           }
           return null
         }
-        console.log("cpid:", this.cp_id);
+        
         // 直接请求
         if (this.hasLogin) {
           this.$u.get('/api/store/product/getPowerCouponProjectDetail', {

@@ -21,7 +21,8 @@
 					<scroll-view scroll-y style="height: 100%;width: 100%;" 
             :refresher-enabled="true"
             :refresher-triggered="startRefresh" 
-            @refresherrefresh="onRefresh">
+            @refresherrefresh="onRefresh"
+            @scrolltolower="onBottom">
 				    <view class="page-box" v-if="item.length || loadStatus[index] != 'nomore'">
 				    	<view class="order" v-for="(info, idx) in item" :key="idx">
 				    		<view class="top">
@@ -219,9 +220,10 @@ export default {
     if (options.type != 0) {
       this.current = options.type
       this.swiperCurrent = options.type
-      if (this.init) this.getOrderList(this.current);
+      // if (this.init) this.getOrderList(this.current);
     } else {
-      this.getOrderList(this.current)
+      this.initload = false
+      // this.getOrderList(this.current)
     }
 	},
   onShow() {
@@ -253,9 +255,7 @@ export default {
 			};
 		}
 	},
-  onReachBottom() {
-    this.getOrderList(this.current)
-  },
+  
   // onPullDownRefresh() {
   //   this.startRefresh = true
   //   this.loadStatus[this.current] = 'loadmore'
@@ -263,6 +263,9 @@ export default {
   //   this.pageList[this.current] = 1
   // },
 	methods: {
+    onBottom() {
+      this.getOrderList(this.current)
+    },
     onRefresh() {
       this.startRefresh = true
       this.loadStatus[this.current] = 'loadmore'
@@ -354,11 +357,11 @@ export default {
         if (idx != 1) {
           params.status = idx-2
         }
-        if (idx == 1) {
-          url = '/api/order/group_order_list'
-        } else {
-          url = '/api/order/list'
-        }
+     //    if (idx == 1) {
+     //     url = '/api/order/group_order_list'
+     //   } else {
+       //   url = '/api/order/list'
+      //  }
         if (params.status == -2) {
           params.status = ''
         }

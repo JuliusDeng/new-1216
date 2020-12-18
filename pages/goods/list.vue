@@ -100,6 +100,7 @@
 					}).then(({
 						data
 					}) => {
+						console.log("参数：", params)
 						this.list = this.list.concat(data.list)
 						if (data.list.length < this.limit) {
 							this.loadStatus = 'nomore'
