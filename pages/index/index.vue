@@ -131,13 +131,13 @@
 						<!-- <text class="label">更好的时代，值得遇见更好的你</text> -->
 					</view>
 					<view class="t-right">
-						<text class="bold">{{ cardSwiper+1 }}</text>
+						<text class="bold">{{ cardSwiper1+1 }}</text>
 						<text class="" style="padding-bottom: 6rpx;">/{{ footMoreList[1].length }}</text>
 					</view>
 				</view>
 				<!-- 轮播图 -->
-				<swiper :indicator-dots="false" :autoplay="true" :interval="4000" :duration="1000" :circular="true" :current="cardSwiper"
-				 @change="changeCardSwiper" style="height: 520rpx;">
+				<swiper :indicator-dots="false" :autoplay="true" :interval="3000" :duration="1000" :circular="true" :current="cardSwiper1"
+				 @change="changeCardSwiper1" style="height: 520rpx;">
 					<swiper-item v-for="(item, index) in footMoreList[1]" :key="index" class="mx-2 rounded-8">
 						<image :src="item.image" class="rounded-8" style="width: 710rpx; height: 330rpx;"></image>
 						<!-- 图下文字 -->
@@ -532,13 +532,13 @@
 						<!-- <text class="label">更好的时代，值得遇见更好的你</text> -->
 					</view>
 					<view class="t-right">
-						<text class="bold">{{ cardSwiper+1 }}</text>
+						<text class="bold">{{ cardSwiper2+1 }}</text>
 						<text class="" style="padding-bottom: 6rpx;">/{{ footMoreList[10].length }}</text>
 					</view>
 				</view>
 				<!-- 轮播图 -->
 				<swiper :indicator-dots="false" :autoplay="true" :interval="4000" :duration="1000" :circular="true" :current="cardSwiper"
-				 @change="changeCardSwiper" style="height: 520rpx;">
+				 @change="changeCardSwiper2" style="height: 520rpx;">
 					<swiper-item v-for="(item, index) in footMoreList[1]" :key="index" class="mx-2 rounded-8">
 						<image :src="item.image" class="rounded-8" style="width: 710rpx; height: 330rpx;"></image>
 						<!-- 图下文字 -->
@@ -622,7 +622,11 @@
 				tabsCurrent: 0,
 				banner: [],
 				swiperCurrent: 0,
-				cardSwiper: 0,
+				
+				cardSwiper1: 0,
+				cardSwiper2: 0,
+				
+				
 				gridList: [],
 				page: 1,
 				limit: 10,
@@ -850,11 +854,17 @@
 				this.$u.route(params)
 			},
 			// 卡片切换
-			changeCardSwiper({
-				detail
-			}) {
-				this.cardSwiper = detail.current
+			changeCardSwiper1({detail}) {
+				this.cardSwiper1 = detail.current
 			},
+			changeCardSwiper2({detail}) {
+				this.cardSwiper2 = detail.current
+			},
+			// changeCardSwiper({
+			// 	detail
+			// }) {
+			// 	this.cardSwiper1 = detail.current
+			// },
 			// tabs切换
 			tabsChange(index) {
 				this.tabsCurrent = index

@@ -212,7 +212,8 @@ export default {
       payId: 0,
       startRefresh: false,
       init: true,
-      initload: false
+      initload: false,
+      initFlag: false
 		};
 	},
 	onLoad(options) {
@@ -220,7 +221,8 @@ export default {
     if (options.type != 0) {
       this.current = options.type
       this.swiperCurrent = options.type
-      // if (this.init) this.getOrderList(this.current);
+      this.initFlag = true
+      this.getOrderList(this.current)
     } else {
       this.initload = false
       // this.getOrderList(this.current)
@@ -420,6 +422,10 @@ export default {
       }
 		},
 		animationfinish({ detail: { current } }) {
+      if (this.initFlag) {
+        this.initFlag = false
+        return null
+      }
 			// this.$refs.tabs.setFinishCurrent(current);
 			this.swiperCurrent = current;
 			this.current = current;

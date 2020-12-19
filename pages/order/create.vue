@@ -150,7 +150,7 @@
               color: '#333',
               width: '100%'
             }" ripple style="width: 100%"
-            @click="onPayment">
+            @click="payType != 'routine' ? onConfirm() : onPayment()">
             立即支付
           </u-button>
         </view>
@@ -317,6 +317,17 @@
           setTimeout(() => {
             uni.navigateBack()
           }, 1000)
+        })
+      },
+      onConfirm () {
+        uni.showModal({
+          showCancel: true,
+          title: '是否确认使用余额支付?',
+          success: (e) => {
+            if (e.confirm) {
+              this.onPayment()
+            }
+          }
         })
       },
       onPayment () {
