@@ -127,7 +127,7 @@
 			</view>
 
 			<!-- 2 吃喝玩乐推荐 card swiper -->
-			<view class="card-swiper" v-if="footMoreList[1].length > 0">
+			<view class="card-swiper mb-2 pb-2 border-bottom" v-if="footMoreList[1].length > 0">
 				<view class="card-top">
 					<view class="t-left">
 						<!-- <image src="/static/ico-star.png" mode="aspectFit" class="ico-star"></image> -->
@@ -368,7 +368,7 @@
 				<!-- 玩乐特惠专区内容 -->
 				<view class="px-2 d-flex j-sb flex-wrap">
 					<!-- 750-40=710-660=50 -->
-					<view class="mb-1" style="width: 340rpx;height: 400rpx;" 
+					<view class="mb-1 shadow" style="width: 340rpx;height: 400rpx;" 
 					v-for="(item, index) in footMoreList[6]" :key="index" @click="toRoute({
 						url: 'pages/goods/details',
 						params: {
@@ -417,11 +417,11 @@
 				<!-- 丽人美容|气质小仙女 内容 -->
 				<view class="px-2 d-flex j-sb flex-wrap">
 					<!-- 750-40=710-660=50 -->
-					<view class="mb-1" style="width: 340rpx;height: 400rpx;" 
+					<view class="mb-1 shadow" style="width: 340rpx;height: 400rpx;" 
 					v-for="(item, index) in footMoreList[7]" :key="index" @click="toRoute({
 						url: 'pages/goods/details',
 						params: {
-						  pid: 313
+						  id: item.product_id
 						}
 					})">
 						<image :src="item.image" style="width: 340rpx;height: 220rpx;"></image>
@@ -465,7 +465,7 @@
 				<!-- 生活服务类专区 内容 -->
 				<view class="px-2 d-flex j-sb flex-wrap">
 					<!-- 750-40=710-660=50 -->
-					<view class="mb-1" style="width: 340rpx;height: 400rpx;" 
+					<view class="mb-1 shadow" style="width: 340rpx;height: 400rpx;" 
 					v-for="(item, index) in footMoreList[8]" :key="index" @click="toRoute({
 						url: 'pages/goods/details',
 						params: {
@@ -513,7 +513,7 @@
 				<!-- 休闲娱乐专区 内容 -->
 				<view class="px-2 d-flex j-sb flex-wrap">
 					<!-- 750-40=710-660=50 -->
-					<view class="mb-1" style="width: 340rpx;height: 400rpx;" 
+					<view class="mb-1 shadow" style="width: 340rpx;height: 400rpx;" 
 					v-for="(item, index) in footMoreList[9]" :key="index" @click="toRoute({
 						url: 'pages/goods/details',
 						params: {
@@ -726,7 +726,7 @@
 			
 			getFootMore() {
 				let url = '/api/store/product/recommend/lst'
-				let limit = 4
+				let limit = 10
 				let params = {}
 				switch (this.nowStep) {
 					case -1: // 1 今日商品秒杀 nowStep默认值为 -1 变0
@@ -735,23 +735,19 @@
 					case 0: // 2 吃喝玩乐推荐
 						url = '/api/store/product/lst'
 						params.hot_type = 'best'
-						limit = '10'
 						break;
 					case 1: // 3 必吃美食 优选top
 						url = '/api/store/product/lst'
 						params.hot_type = 'good'
-						limit = '10'
 						break;
 					case 2: // 4 网红风味|吃货必备
 						url = '/api/store/product/lst'
 						params.pid = 314
 						// params.hot_type = 'new'
-						limit = 10
 						break;
 					case 3: // 5 火锅|一起涮火锅
 						url = '/api/store/product/lst'
 						params.pid = '325'
-						limit = 10
 						// this.nowStep ++
 						// this.getFootMore()
 						// return null;
@@ -759,7 +755,6 @@
 					case 4: // 6 烤肉|烤鱼|烧烤吃不腻
 						url = '/api/store/product/lst'
 						params.pid = '326'
-						limit = 10
 						// this.nowStep ++
 						// this.getFootMore()
 						// return null;
@@ -767,35 +762,30 @@
 					case 5:  // 7 玩乐特惠专区
 						url = '/api/store/product/lst'
 						params.isvip = '1'
-						limit = '16'
 						break;
 					case 6:  // 8 丽人美容|气质小仙女
 						url = '/api/store/product/lst'
 						params.pid  = '313'
-						limit = '16'
 						break;	
 					case 7:  // 9 生活服务类专区
 						url = '/api/store/product/lst'
 						params.pid = '316'
-						limit = '16'
 						break;
 					case 8:  // 10 休闲娱乐专区
 						url = '/api/store/product/lst'
 						params.pid = '315'
-						limit = '16'
 						break;
 						
 					case 9: // 11 亲子教育
 						url = '/api/store/product/lst'
 						params.pid = '327'
-						limit = '10'
 						break;
 					default:
 						break;
 				}
 				this.$u.get(url, {
 					page: 1,
-					limit: limit,
+					limit,
 					...params
 				}).then(({data}) => {
 					// nowStep默认值为 -1
