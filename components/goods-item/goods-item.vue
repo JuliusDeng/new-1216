@@ -19,7 +19,11 @@
     <view class="goods-price">
       <text class="goods-price-small red">￥</text>
       <text class="goods-price-strong">{{ price }}</text>
+	  <!-- <text class="goods-price-strong">{{ 55 }}</text> -->
+	  <text class="text-red-light font-20 ml-1" v-if="item.spec_type">起</text>
+	  <!-- <text class="text-red-light font-20 ml-1" >起</text> -->
       <text class="text-del u-margin-left-10">{{ oPrice }}</text>
+	  <!-- <text class="text-del u-margin-left-10">{{ 66 }}</text> -->
       <view class="goods-btn">
         <u-button type="warning" size="mini" shape="circle" :custom-style="{color: '#333'}" 
           v-if="showBtn" @click="handle">抢购</u-button>

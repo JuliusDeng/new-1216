@@ -17,9 +17,9 @@
 				<u-tabs name="cate_name" :list="tabsList" :current="tabsCurrent" @change="tabsChange"></u-tabs>
 			</view>
 		</u-sticky> -->
-		<view class="position-fixed" style="top: 140rpx;height: 80rpx;z-index: 99;" >
-			<u-tabs name="cate_name" :list="tabsList" :current="tabsCurrent" @change="tabsChange"></u-tabs>
-		</view>
+		<scroll-view class="position-fixed" style="top: 140rpx;height: 80rpx;z-index: 99;" >
+			<u-tabs name="cate_name" :bold="true" :list="tabsList" :current="tabsCurrent" @change="tabsChange"></u-tabs>
+		</scroll-view>
 		<view class="bg-yellow" style="height: 80rpx;"></view>
 			
 		
@@ -41,13 +41,13 @@
 						  }
 						})">
 						<u-icon :name="item.pic" :size="56"></u-icon>
-						<view class="grid-text font-700">{{ item.name }}</view>
+						<view class="grid-text font-700 mt-1">{{ item.name }}</view>
 					</u-grid-item>
 				</u-grid>
 			</view>
 
 			<!-- 今日商品秒杀 -->
-			<view class="new-goods" v-if="nowStep > -1 && footMoreList[0].length">
+			<view class="new-goods" v-if="footMoreList[0].length > 0">
 				<view class="title-box">
 					<!-- <image src="/static/ico-star.png" mode="aspectFit" class="ico-star"></image> -->
 					<view class="line line-top"></view>
@@ -116,13 +116,18 @@
 				</view>
 			</view>
 
-			<!--  广告图1 2张 商圈查看 -->
-			<view class="mx-2 my-4 d-flex j-sb">
-				<image :src="hot[0].pic" style="width: 710rpx;height: 430rpx;" class="rounded"></image>
+			<!--  广告1 2 3 商圈查看 -->
+			<view class="mx-2 my-4 d-flex j-sb" v-if="hot[0].pic">
+				<!-- <image :src="hot[0].pic" style="width: 710rpx;height: 430rpx;" class="rounded"></image> -->
+				<image :src="hot[0].pic" v-if="hot[0].pic" style="width: 350rpx;height: 430rpx;"></image>
+				<view class="d-flex flex-column j-sb">
+					<image :src="hot[1].pic" v-if="hot[1].pic" style="width: 350rpx;height: 210rpx;"></image>
+					<image :src="hot[2].pic" v-if="hot[2].pic" style="width: 350rpx;height: 210rpx;"></image>
+				</view>
 			</view>
 
-			<!-- 吃喝玩乐推荐 card swiper -->
-			<view class="card-swiper">
+			<!-- 2 吃喝玩乐推荐 card swiper -->
+			<view class="card-swiper" v-if="footMoreList[1].length > 0">
 				<view class="card-top">
 					<view class="t-left">
 						<!-- <image src="/static/ico-star.png" mode="aspectFit" class="ico-star"></image> -->
@@ -142,7 +147,7 @@
 						<image :src="item.image" class="rounded-8" style="width: 710rpx; height: 330rpx;"></image>
 						<!-- 图下文字 -->
 						<view class="" style="width: 710rpx;">
-							<text class="text-elli-two my-1">{{ item.store_info}}</text>
+							<text class="text-elli-two my-1">{{ item.store_name}}</text>
 							<view class="d-flex j-sb a-center">
 								<!-- 左侧 -->
 								<view class="my-1">
@@ -172,7 +177,7 @@
 
 			</view>
 
-			<!-- 广告图2 轮播广告图 -->
+			<!-- 广告图4 轮播广告图 -->
 			<!-- <swiper :indicator-dots="false" :autoplay="false" :interval="3000" :duration="1000" :circular="true">
 				<swiper-item style="height: 360rpx;">
 					<image src="/static/topbg.jpg" style="height: 360rpx;width: 710rpx;" class="d-block mx-2"></image>
@@ -181,14 +186,14 @@
 					<image src="/static/tran.png" style="height: 360rpx;width: 710rpx;" class="d-block mx-2 border"></image>
 				</swiper-item>
 			</swiper> -->
-			<view class="mx-2 my-1">
+			<view class="mx-2 my-1" v-if="hot[3].pic">
 				<!-- <image :src="hot[1].pic" style="width: 710rpx;height: 360rpx;" class="rounded"></image> -->
-				<image src="../../static/topbg.jpg" style="width: 710rpx;height: 360rpx;" class="rounded"></image>
+				<image :src="hot[3].pic" style="width: 710rpx;height: 360rpx;" class="rounded"></image>
 			</view>
 
 
-			<!-- 必吃美食|优选Top -->
-			<view class="goods-list" >
+			<!-- 3 必吃美食|优选Top -->
+			<view class="goods-list" v-if="footMoreList[2].length > 0">
 				<view class="title-box">
 					<view class="line line-top" style="width: 370rpx;"></view>
 					<text>⭐️ 必吃美食|优选Top</text>
@@ -212,7 +217,7 @@
 						<!-- 右侧 -->
 						<view class="d-flex flex-column j-sb" style="width: 420rpx;">
 							<view>
-								<view class="text-elli-two">{{item.store_info}}</view>
+								<view class="text-elli-two">{{item.store_name}}</view>
 								<arrow mtop="mt-1">{{ ((item.price / item.ot_price) * 10).toFixed(1)  }}折</arrow>
 							</view>
 
@@ -242,18 +247,18 @@
 				</view>
 			</view>
 
-			 <!-- 广告3 -->
-			<view class="mx-2 my-3">
+			 <!-- 广告5 -->
+			<view class="mx-2 my-3" v-if="hot[4].pic">
 				<!-- <image :src="hot[2].pic" style="width: 710rpx;height: 260rpx;" class="rounded"></image> -->
-				<image src="../../static/topbg.jpg" style="width: 710rpx;height: 260rpx;" class="rounded"></image>
+				<image :src="hot[4].pic" style="width: 710rpx;height: 260rpx;" class="rounded"></image>
 			</view>
-			<!-- 广告4 -->
-			<view class="mx-2 mb-3">
+			<!-- 广告6 -->
+			<view class="mx-2 mb-3" v-if="hot[5].pic">
 				<!-- <image :src="hot[3].pic" style="width: 710rpx;height: 430rpx;" class="rounded"></image> -->
-				<image src="../../static/topbg.jpg" style="width: 710rpx;height: 430rpx;" class="rounded"></image>
+				<image :src="hot[5].pic" style="width: 710rpx;height: 430rpx;" class="rounded"></image>
 			</view>
 			
-			<!-- 网红风味|吃货必备 本周上新 -->
+			<!-- 4 网红风味|吃货必备 本周上新 -->
 			<view class="goods-list" v-if="footMoreList[3].length > 0">
 				<view class="title-box">
 					<view class="line line-top" style="width: 370rpx;"></view>
@@ -279,7 +284,7 @@
 				</scroll-view>
 			</view>
 
-			<!-- 火锅|一起涮火锅 本周上新 -->
+			<!-- 5 火锅|一起涮火锅 本周上新 -->
 			<view class="goods-list" v-if="footMoreList[4].length > 0">
 				<view class="title-box">
 					<view class="line line-top" style="width: 330rpx;"></view>
@@ -305,7 +310,7 @@
 				</scroll-view>
 			</view>
 
-			<!-- 烤肉|烤鱼|烧烤吃不腻 本周上新 -->
+			<!-- 6 烤肉|烤鱼|烧烤吃不腻 本周上新 -->
 			<view class="goods-list" v-if="footMoreList[5].length > 0">
 				<view class="title-box">
 					<!-- <image src="/static/ico-star.png" mode="aspectFit" class="ico-star"></image> -->
@@ -332,19 +337,19 @@
 				</scroll-view>
 			</view>
 
-			<!-- 广告5 -->
+			<!-- 广告7 -->
 			<!-- <view class="advint" v-if="nowStep > 4 && ad.home_ad_pic" @click="toRoute({url: ad.home_ad_url})">
 				<u-image :src="ad.home_ad_pic" width="100%" height="400rpx"></u-image>
 			</view> -->
-			<view class="mx-2 mb-3">
-				<image src="../../static/topbg.jpg" style="width: 710rpx;height: 430rpx;" class="rounded"></image>
+			<view class="mx-2 mb-3" v-if="hot[6].pic">
+				<image :src="hot[6].pic" style="width: 710rpx;height: 430rpx;" class="rounded"></image>
 			</view>
-			<!-- 广告6 -->
-			<view class="mx-2 mb-3">
-				<image src="../../static/topbg.jpg" style="width: 710rpx;height: 430rpx;" class="rounded"></image>
+			<!-- 广告8 -->
+			<view class="mx-2 mb-3" v-if="hot[7].pic">
+				<image :src="hot[7].pic" style="width: 710rpx;height: 430rpx;" class="rounded"></image>
 			</view>
 
-			<!-- 玩乐特惠专区 -->
+			<!-- 7 玩乐特惠专区 -->
 			<view class="goods-list" v-if="footMoreList[6].length > 0">
 				<view class="title-box">
 					<view class="line line-top" style="width: 410rpx;"></view>
@@ -363,7 +368,7 @@
 				<!-- 玩乐特惠专区内容 -->
 				<view class="px-2 d-flex j-sb flex-wrap">
 					<!-- 750-40=710-660=50 -->
-					<view class="mb-2" style="width: 340rpx;height: 400rpx;" 
+					<view class="mb-1" style="width: 340rpx;height: 400rpx;" 
 					v-for="(item, index) in footMoreList[6]" :key="index" @click="toRoute({
 						url: 'pages/goods/details',
 						params: {
@@ -371,24 +376,29 @@
 						}
 					})">
 						<image :src="item.image" style="width: 340rpx;height: 220rpx;"></image>
-						<view class="text-elli-two">{{item.store_info}}</view>
+						<view class="text-elli-two">{{item.store_name}}</view>
 					
 						<view class="d-flex j-sb ">
 							<view>
 								<member v-if="item.vip_price">会员省{{ (item.price - item.vip_price).toFixed(2) }}元</member>
-								<text class="text-red font-700 font-25 mx-1">￥{{item.price}}</text>
+								<view class="d-flex font-20 mt-1">
+									<text class="text-red font-700 font-25 mx-1">￥{{item.price}}</text>
+									<text class="text-red-light" v-if="item.spec_type">起</text>
+									<!-- <text class="text-red-light">起</text> -->
+								</view>
+
 							</view>
 						</view>
 					</view>
 				</view>
 			</view>
 			
-			<!-- 广告7 -->
-			<view class="mx-2 mb-3">
-				<image src="../../static/topbg.jpg" style="width: 710rpx;height: 430rpx;" class="rounded"></image>
+			<!-- 广告9 -->
+			<view class="mx-2 mb-3" v-if="hot[8].pic">
+				<image :src="hot[8].pic" style="width: 710rpx;height: 430rpx;" class="rounded"></image>
 			</view>
 			
-			<!-- 丽人美容|气质小仙女 -->
+			<!-- 8 丽人美容|气质小仙女 -->
 			<view class="goods-list" v-if="footMoreList[7].length > 0">
 				<view class="title-box">
 					<view class="line line-top" style="width: 410rpx;"></view>
@@ -407,7 +417,7 @@
 				<!-- 丽人美容|气质小仙女 内容 -->
 				<view class="px-2 d-flex j-sb flex-wrap">
 					<!-- 750-40=710-660=50 -->
-					<view class="mb-2" style="width: 340rpx;height: 400rpx;" 
+					<view class="mb-1" style="width: 340rpx;height: 400rpx;" 
 					v-for="(item, index) in footMoreList[7]" :key="index" @click="toRoute({
 						url: 'pages/goods/details',
 						params: {
@@ -415,24 +425,28 @@
 						}
 					})">
 						<image :src="item.image" style="width: 340rpx;height: 220rpx;"></image>
-						<view class="text-elli-two">{{item.store_info}}</view>
+						<view class="text-elli-two">{{item.store_name}}</view>
 					
 						<view class="d-flex j-sb ">
 							<view>
 								<member v-if="item.vip_price">会员省{{ (item.price - item.vip_price).toFixed(2) }}元</member>
-								<text class="text-red font-700 font-25 mx-1">￥{{item.price}}</text>
+								<view class="d-flex font-20 mt-1">
+									<text class="text-red font-700 font-25 mx-1">￥{{item.price}}</text>
+									<text class="text-red-light" v-if="item.spec_type">起</text>
+									<!-- <text class="text-red-light">起</text> -->
+								</view>
 							</view>
 						</view>
 					</view>
 				</view>
 			</view>
 			
-			<!-- 广告8 -->
-			<view class="mx-2 mb-3">
-				<image src="../../static/topbg.jpg" style="width: 710rpx;height: 430rpx;" class="rounded"></image>
+			<!-- 广告10 -->
+			<view class="mx-2 mb-3" v-if="hot[9].pic">
+				<image :src="hot[9].pic" style="width: 710rpx;height: 430rpx;" class="rounded"></image>
 			</view>
 			
-			<!-- 生活服务类专区 -->
+			<!-- 9 生活服务类专区 -->
 			<view class="goods-list" v-if="footMoreList[8].length > 0">
 				<view class="title-box">
 					<view class="line line-top" style="width: 410rpx;"></view>
@@ -451,32 +465,36 @@
 				<!-- 生活服务类专区 内容 -->
 				<view class="px-2 d-flex j-sb flex-wrap">
 					<!-- 750-40=710-660=50 -->
-					<view class="mb-2" style="width: 340rpx;height: 400rpx;" 
+					<view class="mb-1" style="width: 340rpx;height: 400rpx;" 
 					v-for="(item, index) in footMoreList[8]" :key="index" @click="toRoute({
 						url: 'pages/goods/details',
 						params: {
-						  id: item.product_id
+						  pid: '316'
 						}
 					})">
 						<image :src="item.image" style="width: 340rpx;height: 220rpx;"></image>
-						<view class="text-elli-two">{{item.store_info}}</view>
+						<view class="text-elli-two">{{item.store_name}}</view>
 					
 						<view class="d-flex j-sb ">
 							<view>
 								<member v-if="item.vip_price">会员省{{ (item.price - item.vip_price).toFixed(2) }}元</member>
-								<text class="text-red font-700 font-25 mx-1">￥{{item.price}}</text>
+								<view class="d-flex font-20 mt-1">
+									<text class="text-red font-700 font-25 mx-1">￥{{item.price}}</text>
+									<text class="text-red-light" v-if="item.spec_type">起</text>
+									<!-- <text class="text-red-light">起</text> -->
+								</view>
 							</view>
 						</view>
 					</view>
 				</view>
 			</view>
 			
-			<!-- 广告9 -->
-			<view class="mx-2 mb-3">
-				<image src="../../static/topbg.jpg" style="width: 710rpx;height: 430rpx;" class="rounded"></image>
+			<!-- 广告11 -->
+			<view class="mx-2 mb-3" v-if="hot[10].pic">
+				<image :src="hot[10].pic" style="width: 710rpx;height: 430rpx;" class="rounded"></image>
 			</view>
 			
-			<!-- 休闲娱乐专区 -->
+			<!-- 10 休闲娱乐专区 -->
 			<view class="goods-list" v-if="footMoreList[9].length > 0">
 				<view class="title-box">
 					<view class="line line-top" style="width: 410rpx;"></view>
@@ -485,7 +503,7 @@
 					  url: 'pages/goods/list',
 					  params: {
 					  title: '休闲娱乐专区',
-					  hot_type: '315'
+					  pid: '315'
 					  }
 					})">
 						<text>更多推荐</text>
@@ -495,7 +513,7 @@
 				<!-- 休闲娱乐专区 内容 -->
 				<view class="px-2 d-flex j-sb flex-wrap">
 					<!-- 750-40=710-660=50 -->
-					<view class="mb-2" style="width: 340rpx;height: 400rpx;" 
+					<view class="mb-1" style="width: 340rpx;height: 400rpx;" 
 					v-for="(item, index) in footMoreList[9]" :key="index" @click="toRoute({
 						url: 'pages/goods/details',
 						params: {
@@ -503,27 +521,31 @@
 						}
 					})">
 						<image :src="item.image" style="width: 340rpx;height: 220rpx;"></image>
-						<view class="text-elli-two">{{item.store_info}}</view>
+						<view class="text-elli-two">{{item.store_name}}</view>
 					
 						<view class="d-flex j-sb ">
 							<view>
 								<member v-if="item.vip_price">会员省{{ (item.price - item.vip_price).toFixed(2) }}元</member>
-								<text class="text-red font-700 font-25 mx-1">￥{{item.price}}</text>
+								<view class="d-flex font-20 mt-1">
+									<text class="text-red font-700 font-25 mx-1">￥{{item.price}}</text>
+									<text class="text-red-light" v-if="item.spec_type">起</text>
+									<!-- <text class="text-red-light">起</text> -->
+								</view>
 							</view>
 						</view>
 					</view>
 				</view>
 			</view>
 				
-			<!-- 广告10 -->
-			<view class="mx-2 mb-3">
-				<image src="../../static/topbg.jpg" style="width: 710rpx;height: 430rpx;" class="rounded"></image>
+			<!-- 广告12 -->
+			<view class="mx-2 mb-3" v-if="hot[11].pic">
+				<image :src="hot[11].pic" style="width: 710rpx;height: 430rpx;" class="rounded"></image>
 			</view>
 				
 			
 			
-			<!-- 亲子教育 -->
-			<view class="card-swiper">
+			<!-- 11 亲子教育 -->
+			<view class="card-swiper" v-if="footMoreList[10].length > 0">
 				<view class="card-top">
 					<view class="t-left">
 						<!-- <image src="/static/ico-star.png" mode="aspectFit" class="ico-star"></image> -->
@@ -537,13 +559,13 @@
 					</view>
 				</view>
 				<!-- 轮播图 -->
-				<swiper :indicator-dots="false" :autoplay="true" :interval="4000" :duration="1000" :circular="true" :current="cardSwiper"
+				<swiper :indicator-dots="false" :autoplay="true" :interval="3000" :duration="1000" :circular="true" :current="cardSwiper2"
 				 @change="changeCardSwiper2" style="height: 520rpx;">
-					<swiper-item v-for="(item, index) in footMoreList[1]" :key="index" class="mx-2 rounded-8">
+					<swiper-item v-for="(item, index) in footMoreList[11]" :key="index" class="mx-2 rounded-8">
 						<image :src="item.image" class="rounded-8" style="width: 710rpx; height: 330rpx;"></image>
 						<!-- 图下文字 -->
 						<view class="" style="width: 710rpx;">
-							<text class="text-elli-two my-1">{{ item.store_info}}</text>
+							<text class="text-elli-two my-1">{{ item.store_name}}</text>
 							<view class="d-flex j-sb a-center">
 								<!-- 左侧 -->
 								<view class="my-1">
@@ -713,6 +735,7 @@
 					case 0: // 2 吃喝玩乐推荐
 						url = '/api/store/product/lst'
 						params.hot_type = 'best'
+						limit = '10'
 						break;
 					case 1: // 3 必吃美食 优选top
 						url = '/api/store/product/lst'
@@ -736,7 +759,7 @@
 					case 4: // 6 烤肉|烤鱼|烧烤吃不腻
 						url = '/api/store/product/lst'
 						params.pid = '326'
-						// limit = 10
+						limit = 10
 						// this.nowStep ++
 						// this.getFootMore()
 						// return null;
@@ -744,23 +767,28 @@
 					case 5:  // 7 玩乐特惠专区
 						url = '/api/store/product/lst'
 						params.isvip = '1'
+						limit = '16'
 						break;
-					case 5:  // 8 丽人美容|气质小仙女
+					case 6:  // 8 丽人美容|气质小仙女
 						url = '/api/store/product/lst'
 						params.pid  = '313'
+						limit = '16'
 						break;	
-					case 5:  // 9 生活服务类专区
+					case 7:  // 9 生活服务类专区
 						url = '/api/store/product/lst'
 						params.pid = '316'
+						limit = '16'
 						break;
-					case 5:  // 10 休闲娱乐专区
+					case 8:  // 10 休闲娱乐专区
 						url = '/api/store/product/lst'
 						params.pid = '315'
+						limit = '16'
 						break;
 						
-					case 6: // 11 亲子教育
+					case 9: // 11 亲子教育
 						url = '/api/store/product/lst'
-						params.hot_type = 'best'
+						params.pid = '327'
+						limit = '10'
 						break;
 					default:
 						break;
@@ -769,22 +797,22 @@
 					page: 1,
 					limit: limit,
 					...params
-				}).then(({
-					data
-				}) => {
+				}).then(({data}) => {
 					// nowStep默认值为 -1
 					this.nowStep++
 					this.footMoreList[this.nowStep] = data.list
+					console.log("data:",data);
+					console.log("this.nowStep：", this.nowStep)
+					console.log(`获取footMoreList[this.nowStep]:`, data);
 					// 递归  nowStep默认值为 -1 +1
-					if(this.nowStep < 11) {
+					if(this.nowStep < 10) {
 						this.getFootMore()
 					} else {
+						console.log("介绍打印：",this.footMoreList);
 						return false
 					}
 					
-					console.log("首页参数：", params)
-					console.log(`获取推荐商品nowStep-1：${this.nowStep-1}:`, data);
-					console.log(`上拉加载了nowStep：${this.nowStep}`);
+					
 					
 					// if (this.nowStep > 6) {
 					// 	console.log(`上拉66了nowStep：${this.nowStep}`);
@@ -855,16 +883,13 @@
 			},
 			// 卡片切换
 			changeCardSwiper1({detail}) {
+				// console.log("cardSwiper111:", detail.current);
 				this.cardSwiper1 = detail.current
 			},
 			changeCardSwiper2({detail}) {
+				// console.log("cardSwiper222:", detail.current);
 				this.cardSwiper2 = detail.current
 			},
-			// changeCardSwiper({
-			// 	detail
-			// }) {
-			// 	this.cardSwiper1 = detail.current
-			// },
 			// tabs切换
 			tabsChange(index) {
 				this.tabsCurrent = index
