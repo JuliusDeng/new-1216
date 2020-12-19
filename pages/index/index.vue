@@ -41,7 +41,7 @@
 						  }
 						})">
 						<u-icon :name="item.pic" :size="56"></u-icon>
-						<view class="grid-text">{{ item.name }}</view>
+						<view class="grid-text font-700">{{ item.name }}</view>
 					</u-grid-item>
 				</u-grid>
 			</view>
@@ -118,9 +118,7 @@
 
 			<!--  广告图1 2张 商圈查看 -->
 			<view class="mx-2 my-4 d-flex j-sb">
-				<!-- <image :src="hot[0].pic" style="width: 710rpx;height: 430rpx;" class="rounded"></image> -->
-				<image src="../../static/topbg.jpg" style="width: 340rpx;height: 430rpx;" class="rounded"></image>
-				<image src="../../static/topbg.jpg" style="width: 340rpx;height: 430rpx;" class="rounded"></image>
+				<image :src="hot[0].pic" style="width: 710rpx;height: 430rpx;" class="rounded"></image>
 			</view>
 
 			<!-- 吃喝玩乐推荐 card swiper -->
@@ -256,7 +254,7 @@
 			</view>
 			
 			<!-- 网红风味|吃货必备 本周上新 -->
-			<view class="goods-list" >
+			<view class="goods-list" v-if="footMoreList[3].length > 0">
 				<view class="title-box">
 					<view class="line line-top" style="width: 370rpx;"></view>
 					<text>⭐️ 网红风味|吃货必备</text>
@@ -347,7 +345,7 @@
 			</view>
 
 			<!-- 玩乐特惠专区 -->
-			<view class="goods-list" >
+			<view class="goods-list" v-if="footMoreList[6].length > 0">
 				<view class="title-box">
 					<view class="line line-top" style="width: 410rpx;"></view>
 					<text>⭐️ 玩乐特惠专区</text>
@@ -355,7 +353,7 @@
 					  url: 'pages/goods/list',
 					  params: {
 					  title: '玩乐特惠专区',
-					  hot_type: 'good'
+					  isvip: '1'
 					  }
 					})">
 						<text>更多推荐</text>
@@ -366,7 +364,7 @@
 				<view class="px-2 d-flex j-sb flex-wrap">
 					<!-- 750-40=710-660=50 -->
 					<view class="mb-2" style="width: 340rpx;height: 400rpx;" 
-					v-for="(item, index) in footMoreList[2]" :key="index" @click="toRoute({
+					v-for="(item, index) in footMoreList[6]" :key="index" @click="toRoute({
 						url: 'pages/goods/details',
 						params: {
 						  id: item.product_id
@@ -391,7 +389,7 @@
 			</view>
 			
 			<!-- 丽人美容|气质小仙女 -->
-			<view class="goods-list" >
+			<view class="goods-list" v-if="footMoreList[7].length > 0">
 				<view class="title-box">
 					<view class="line line-top" style="width: 410rpx;"></view>
 					<text>⭐️ 丽人美容|气质小仙女</text>
@@ -399,7 +397,7 @@
 					  url: 'pages/goods/list',
 					  params: {
 					  title: '丽人美容|气质小仙女',
-					  hot_type: 'good'
+					  pid: '313'
 					  }
 					})">
 						<text>更多推荐</text>
@@ -410,10 +408,10 @@
 				<view class="px-2 d-flex j-sb flex-wrap">
 					<!-- 750-40=710-660=50 -->
 					<view class="mb-2" style="width: 340rpx;height: 400rpx;" 
-					v-for="(item, index) in footMoreList[2]" :key="index" @click="toRoute({
+					v-for="(item, index) in footMoreList[7]" :key="index" @click="toRoute({
 						url: 'pages/goods/details',
 						params: {
-						  id: item.product_id
+						  pid: 313
 						}
 					})">
 						<image :src="item.image" style="width: 340rpx;height: 220rpx;"></image>
@@ -435,7 +433,7 @@
 			</view>
 			
 			<!-- 生活服务类专区 -->
-			<view class="goods-list" >
+			<view class="goods-list" v-if="footMoreList[8].length > 0">
 				<view class="title-box">
 					<view class="line line-top" style="width: 410rpx;"></view>
 					<text>⭐️ 生活服务类专区</text>
@@ -443,7 +441,7 @@
 					  url: 'pages/goods/list',
 					  params: {
 					  title: '生活服务类专区',
-					  hot_type: 'good'
+					  hot_type: '316'
 					  }
 					})">
 						<text>更多推荐</text>
@@ -454,7 +452,7 @@
 				<view class="px-2 d-flex j-sb flex-wrap">
 					<!-- 750-40=710-660=50 -->
 					<view class="mb-2" style="width: 340rpx;height: 400rpx;" 
-					v-for="(item, index) in footMoreList[2]" :key="index" @click="toRoute({
+					v-for="(item, index) in footMoreList[8]" :key="index" @click="toRoute({
 						url: 'pages/goods/details',
 						params: {
 						  id: item.product_id
@@ -479,7 +477,7 @@
 			</view>
 			
 			<!-- 休闲娱乐专区 -->
-			<view class="goods-list" >
+			<view class="goods-list" v-if="footMoreList[9].length > 0">
 				<view class="title-box">
 					<view class="line line-top" style="width: 410rpx;"></view>
 					<text>⭐️ 休闲娱乐专区</text>
@@ -487,7 +485,7 @@
 					  url: 'pages/goods/list',
 					  params: {
 					  title: '休闲娱乐专区',
-					  hot_type: 'good'
+					  hot_type: '315'
 					  }
 					})">
 						<text>更多推荐</text>
@@ -498,7 +496,7 @@
 				<view class="px-2 d-flex j-sb flex-wrap">
 					<!-- 750-40=710-660=50 -->
 					<view class="mb-2" style="width: 340rpx;height: 400rpx;" 
-					v-for="(item, index) in footMoreList[2]" :key="index" @click="toRoute({
+					v-for="(item, index) in footMoreList[9]" :key="index" @click="toRoute({
 						url: 'pages/goods/details',
 						params: {
 						  id: item.product_id
@@ -535,7 +533,7 @@
 					</view>
 					<view class="t-right">
 						<text class="bold">{{ cardSwiper+1 }}</text>
-						<text class="" style="padding-bottom: 6rpx;">/{{ footMoreList[1].length }}</text>
+						<text class="" style="padding-bottom: 6rpx;">/{{ footMoreList[10].length }}</text>
 					</view>
 				</view>
 				<!-- 轮播图 -->
@@ -712,18 +710,18 @@
 						url = '/api/store/product/lst'
 						params.hot_type = 'best'
 						break;
-					case 1: // 3 必吃美食 优选top（同2）
+					case 1: // 3 必吃美食 优选top
 						url = '/api/store/product/lst'
 						params.hot_type = 'good'
 						limit = '10'
 						break;
-					case 2: // 4 本周上新 ?网红风味
+					case 2: // 4 网红风味|吃货必备
 						url = '/api/store/product/lst'
 						params.pid = 314
 						// params.hot_type = 'new'
 						limit = 10
 						break;
-					case 3: // 5 火锅
+					case 3: // 5 火锅|一起涮火锅
 						url = '/api/store/product/lst'
 						params.pid = '325'
 						limit = 10
@@ -731,7 +729,7 @@
 						// this.getFootMore()
 						// return null;
 						break;
-					case 4: // 6 烧烤
+					case 4: // 6 烤肉|烤鱼|烧烤吃不腻
 						url = '/api/store/product/lst'
 						params.pid = '326'
 						// limit = 10
@@ -743,20 +741,20 @@
 						url = '/api/store/product/lst'
 						params.isvip = '1'
 						break;
-					case 5:  // 8 
+					case 5:  // 8 丽人美容|气质小仙女
 						url = '/api/store/product/lst'
 						params.pid  = '313'
 						break;	
-					case 5:  // 9 
+					case 5:  // 9 生活服务类专区
 						url = '/api/store/product/lst'
 						params.pid = '316'
 						break;
-					case 5:  // 10 
+					case 5:  // 10 休闲娱乐专区
 						url = '/api/store/product/lst'
 						params.pid = '315'
 						break;
 						
-					case 6: // 11 
+					case 6: // 11 亲子教育
 						url = '/api/store/product/lst'
 						params.hot_type = 'best'
 						break;
