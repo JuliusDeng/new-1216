@@ -104,6 +104,8 @@ body{
 .font-100 {font-weight: 100;}/*更细*/
 .font-300 {font-weight: 300;}      /*细*/
 .font-400 { font-weight: 400;}    /*正常*/
+.font-500 { font-weight: 500;}      /*粗 700=bold*/
+.font-600 { font-weight: 600;}      /*粗 700=bold*/
 .font-700 { font-weight: 700;}      /*粗 700=bold*/
 .font-900 { font-weight: 900;} /*更粗 font-weight范围：100-900*/
 .font-italic { font-style: italic;} /*斜体*/

@@ -1,15 +1,11 @@
 <template>
 	<view>
 		<!-- navbar -->
-		<view class="" >
-			<!-- <u-navbar :is-back="false" title="" :background="{backgroundColor: '#001f3f'}">
-				dfsgdsfgsd
-			</u-navbar> -->	
-			
-			<u-navbar :is-back="false" >
-				<view class="search">
+		<view class="bg-red">
+			<u-navbar :is-back="false">
+				<view class="search bg-blue">
 					<view class="search-text">{{ baseInfo.site_name }}</view>
-					<u-search placeholder="搜索好物" :show-action="false" disabled height="56 " @click="toRoute({
+					<u-search placeholder=" " :show-action="false" disabled height="56" @click="toRoute({
 			    url: 'pages/index/search'
 			  })"></u-search>
 				</view>
@@ -23,14 +19,14 @@
 				<u-tabs name="cate_name" :list="tabsList" :current="tabsCurrent" @change="tabsChange"></u-tabs>
 			</view>
 		</u-sticky> -->
-		<scroll-view class="position-fixed" style="height: 80rpx;z-index: 99;" >
+		<scroll-view class="position-fixed" style="top: 140rpx;height: 80rpx;z-index: 99;" >
 			<u-tabs name="cate_name" :bold="true" :list="tabsList" :current="tabsCurrent" @change="tabsChange"></u-tabs>
 		</scroll-view>
 		<view class="bg-yellow" style="height: 80rpx;"></view>
 			
 		
 		<!-- top -->
-		<view class="top-box bg-red">
+		<view class="top-box">
 			<image src="/static/topbg.jpg" mode="aspectFill" class="image"></image>
 		</view>
 		<!-- topradius -->
@@ -57,7 +53,7 @@
 				<view class="title-box">
 					<!-- <image src="/static/ico-star.png" mode="aspectFit" class="ico-star"></image> -->
 					<view class="line line-top"></view>
-					<text class="font-700">⭐️ 今日商品秒杀</text>
+					<text>⭐️ 今日商品秒杀</text>
 					<!-- <text class="label">每天9:30，准时开售</text> -->
 					<view class="sk-more">
 						<navigator url="../goods/seckill">
@@ -81,7 +77,7 @@
 			<view>
 				<view class="title-box">
 					<view class="line line-top"></view>
-					<text class="font-700">⭐️ 天天爱抽奖</text>
+					<text>⭐️ 天天爱抽奖</text>
 					<view class="sk-more" @click="toRoute({
 						  url: lottery.url,
 						  params: {
@@ -93,7 +89,7 @@
 						</view>
 					</view>
 				</view>
-				<view class="mx-2 py-2 shadow-nom" @click="toDay(lotteryDetail)">
+				<view class="mx-2 py-2 shadow-nom" @click="toDetails(lotteryDetail)">
 					<view class="position-relative">
 						<image :src="lotteryDetail.image" style="height: 390rpx;width: 710rpx;" class="d-block"></image>
 						<view class="font-25 position-absolute right-0 bottom-0 d-flex a-center j-center rounded-top-left text-white"
@@ -137,7 +133,7 @@
 				<view class="card-top">
 					<view class="t-left">
 						<!-- <image src="/static/ico-star.png" mode="aspectFit" class="ico-star"></image> -->
-						<text class="title font-700">⭐️ 吃喝玩乐推荐</text>
+						<text class="title">⭐️ 吃喝玩乐推荐</text>
 						<view class="line"></view>
 						<!-- <text class="label">更好的时代，值得遇见更好的你</text> -->
 					</view>
@@ -149,13 +145,7 @@
 				<!-- 轮播图 -->
 				<swiper :indicator-dots="false" :autoplay="true" :interval="3000" :duration="1000" :circular="true" :current="cardSwiper1"
 				 @change="changeCardSwiper1" style="height: 520rpx;">
-					<swiper-item v-for="(item, index) in footMoreList[1]" :key="index" class="mx-2 rounded-8"
-					@click="toRoute({
-						url: 'pages/goods/details',
-						params: {
-						  id: item.product_id
-						}
-					  })">
+					<swiper-item v-for="(item, index) in footMoreList[1]" :key="index" class="mx-2 rounded-8">
 						<image :src="item.image" class="rounded-8" style="width: 710rpx; height: 330rpx;"></image>
 						<!-- 图下文字 -->
 						<view class="" style="width: 710rpx;">
@@ -173,7 +163,12 @@
 									</view>
 								</view>
 								<!-- 右侧 -->
-								<view >
+								<view @click="toRoute({
+									url: 'pages/goods/details',
+									params: {
+									  id: item.product_id
+									}
+								  })">
 									<bottom-buy>立即购买</bottom-buy>
 								</view>
 							</view>
@@ -203,7 +198,7 @@
 			<view class="goods-list" v-if="footMoreList[2].length > 0">
 				<view class="title-box">
 					<view class="line line-top" style="width: 370rpx;"></view>
-					<text class="font-700">⭐️ 必吃美食|优选Top</text>
+					<text>⭐️ 必吃美食|优选Top</text>
 					<view class="secmore" @click="toRoute({
 					  url: 'pages/goods/list', 
 					  params: {
@@ -217,14 +212,8 @@
 				</view>
 
 				<!-- 内容 -->
-				<view class="mx-2 p-2 shadow rounded-8 " style="width: 710rpx;">
-					<view class="d-flex j-sb mb-2" v-for="(item, index) in footMoreList[2]" :key="index"
-					@click="toRoute({
-						url: 'pages/goods/details',
-						params: {
-						  id: item.product_id
-						}
-					  })">
+				<view class="mx-2 p-2  shadow rounded-8 " style="width: 710rpx;">
+					<view class="d-flex j-sb mb-2" v-for="(item, index) in footMoreList[2]" :key="index">
 						<!-- 左图 -->
 						<image :src="item.image" style="width: 220rpx;height: 220rpx;"></image>
 						<!-- 右侧 -->
@@ -240,7 +229,12 @@
 									<text class="text-red font-700 font-25 mx-1">￥{{item.price}}</text>
 									<text class="text-red-light" v-if="item.spec_type">起</text>
 								</view>
-								<view >
+								<view @click="toRoute({
+									url: 'pages/goods/details',
+									params: {
+									  id: item.product_id
+									}
+								  })">
 									<bottom-buy>立即购买</bottom-buy>
 								</view>
 							</view>
@@ -270,7 +264,7 @@
 			<view class="goods-list" v-if="footMoreList[3].length > 0">
 				<view class="title-box">
 					<view class="line line-top" style="width: 370rpx;"></view>
-					<text class="font-700">⭐️ 网红风味|吃货必备</text>
+					<text>⭐️ 网红风味|吃货必备</text>
 					<view class="secmore" @click="toRoute({
 					  url: 'pages/goods/list', 
 					  params: {
@@ -296,7 +290,7 @@
 			<view class="goods-list" v-if="footMoreList[4].length > 0">
 				<view class="title-box">
 					<view class="line line-top" style="width: 330rpx;"></view>
-					<text class="font-700">⭐️ 火锅|一起涮火锅</text>
+					<text>⭐️ 火锅|一起涮火锅</text>
 					<view class="secmore" @click="toRoute({
 					  url: 'pages/goods/list', 
 					  params: {
@@ -323,7 +317,7 @@
 				<view class="title-box">
 					<!-- <image src="/static/ico-star.png" mode="aspectFit" class="ico-star"></image> -->
 					<view class="line line-top" style="width: 410rpx;"></view>
-					<text class="font-700">⭐️ 烤肉|烤鱼|烧烤吃不腻</text>
+					<text>⭐️ 烤肉|烤鱼|烧烤吃不腻</text>
 					<view class="secmore" @click="toRoute({
 					  url: 'pages/goods/list', 
 					  params: {
@@ -361,7 +355,7 @@
 			<view class="goods-list" v-if="footMoreList[6].length > 0">
 				<view class="title-box">
 					<view class="line line-top" style="width: 410rpx;"></view>
-					<text class="font-700">⭐️ 玩乐特惠专区</text>
+					<text>⭐️ 玩乐特惠专区</text>
 					<view class="secmore" @click="toRoute({
 					  url: 'pages/goods/list',
 					  params: {
@@ -376,7 +370,7 @@
 				<!-- 玩乐特惠专区内容 -->
 				<view class="px-2 d-flex j-sb flex-wrap">
 					<!-- 750-40=710-660=50 -->
-					<view class="mb-1 border-bottom" style="width: 340rpx;height: 400rpx;" 
+					<view class="mb-1 shadow" style="width: 340rpx;height: 400rpx;" 
 					v-for="(item, index) in footMoreList[6]" :key="index" @click="toRoute({
 						url: 'pages/goods/details',
 						params: {
@@ -384,7 +378,7 @@
 						}
 					})">
 						<image :src="item.image" style="width: 340rpx;height: 220rpx;"></image>
-						<view class="text-elli-two font-700">{{item.store_name}}</view>
+						<view class="text-elli-two">{{item.store_name}}</view>
 					
 						<view class="d-flex j-sb ">
 							<view>
@@ -410,7 +404,7 @@
 			<view class="goods-list" v-if="footMoreList[7].length > 0">
 				<view class="title-box">
 					<view class="line line-top" style="width: 410rpx;"></view>
-					<text class="font-700">⭐️ 丽人美容|气质小仙女</text>
+					<text>⭐️ 丽人美容|气质小仙女</text>
 					<view class="secmore" @click="toRoute({
 					  url: 'pages/goods/list',
 					  params: {
@@ -422,10 +416,10 @@
 						<u-icon name="arrow-right" size="24"></u-icon>
 					</view>
 				</view>
-				<!--  内容 -->
+				<!-- 丽人美容|气质小仙女 内容 -->
 				<view class="px-2 d-flex j-sb flex-wrap">
 					<!-- 750-40=710-660=50 -->
-					<view class="mb-1 border-bottom" style="width: 340rpx;height: 400rpx;" 
+					<view class="mb-1 shadow" style="width: 340rpx;height: 400rpx;" 
 					v-for="(item, index) in footMoreList[7]" :key="index" @click="toRoute({
 						url: 'pages/goods/details',
 						params: {
@@ -458,26 +452,26 @@
 			<view class="goods-list" v-if="footMoreList[8].length > 0">
 				<view class="title-box">
 					<view class="line line-top" style="width: 410rpx;"></view>
-					<text class="font-700">⭐️ 生活服务类专区</text>
+					<text>⭐️ 生活服务类专区</text>
 					<view class="secmore" @click="toRoute({
 					  url: 'pages/goods/list',
 					  params: {
 					  title: '生活服务类专区',
-					  pid: '316'
+					  hot_type: '316'
 					  }
 					})">
 						<text>更多推荐</text>
 						<u-icon name="arrow-right" size="24"></u-icon>
 					</view>
 				</view>
-				<!--  内容 -->
+				<!-- 生活服务类专区 内容 -->
 				<view class="px-2 d-flex j-sb flex-wrap">
 					<!-- 750-40=710-660=50 -->
-					<view class="mb-1 border-bottom" style="width: 340rpx;height: 400rpx;" 
+					<view class="mb-1 shadow" style="width: 340rpx;height: 400rpx;" 
 					v-for="(item, index) in footMoreList[8]" :key="index" @click="toRoute({
 						url: 'pages/goods/details',
 						params: {
-						  id: item.product_id
+						  pid: '316'
 						}
 					})">
 						<image :src="item.image" style="width: 340rpx;height: 220rpx;"></image>
@@ -506,7 +500,7 @@
 			<view class="goods-list" v-if="footMoreList[9].length > 0">
 				<view class="title-box">
 					<view class="line line-top" style="width: 410rpx;"></view>
-					<text class="font-700">⭐️ 休闲娱乐专区</text>
+					<text>⭐️ 休闲娱乐专区</text>
 					<view class="secmore" @click="toRoute({
 					  url: 'pages/goods/list',
 					  params: {
@@ -521,7 +515,7 @@
 				<!-- 休闲娱乐专区 内容 -->
 				<view class="px-2 d-flex j-sb flex-wrap">
 					<!-- 750-40=710-660=50 -->
-					<view class="mb-1 border-bottom" style="width: 340rpx;height: 400rpx;" 
+					<view class="mb-1 shadow" style="width: 340rpx;height: 400rpx;" 
 					v-for="(item, index) in footMoreList[9]" :key="index" @click="toRoute({
 						url: 'pages/goods/details',
 						params: {
@@ -557,7 +551,7 @@
 				<view class="card-top">
 					<view class="t-left">
 						<!-- <image src="/static/ico-star.png" mode="aspectFit" class="ico-star"></image> -->
-						<text class="title font-700">⭐️ 亲子教育|快乐时光</text>
+						<text class="title">⭐️ 亲子教育|快乐时光</text>
 						<view class="line"></view>
 						<!-- <text class="label">更好的时代，值得遇见更好的你</text> -->
 					</view>
@@ -569,13 +563,7 @@
 				<!-- 轮播图 -->
 				<swiper :indicator-dots="false" :autoplay="true" :interval="3000" :duration="1000" :circular="true" :current="cardSwiper2"
 				 @change="changeCardSwiper2" style="height: 520rpx;">
-					<swiper-item v-for="(item, index) in footMoreList[11]" :key="index" class="mx-2 rounded-8"
-					@click="toRoute({
-						url: 'pages/goods/details',
-						params: {
-						  id: item.product_id
-						}
-					  })">
+					<swiper-item v-for="(item, index) in footMoreList[11]" :key="index" class="mx-2 rounded-8">
 						<image :src="item.image" class="rounded-8" style="width: 710rpx; height: 330rpx;"></image>
 						<!-- 图下文字 -->
 						<view class="" style="width: 710rpx;">
@@ -593,7 +581,12 @@
 									</view>
 								</view>
 								<!-- 右侧 -->
-								<view >
+								<view @click="toRoute({
+									url: 'pages/goods/details',
+									params: {
+									  id: item.product_id
+									}
+								  })">
 									<bottom-buy>立即购买</bottom-buy>
 								</view>
 							</view>
@@ -703,8 +696,6 @@
 			this.getSeckillTime()
 			this.showLottery()
 			
-			this.showLoading()
-			
 		},
 		// onReachBottom() {
 		// 	if (!this.tabsCurrent) { // 首页index
@@ -717,13 +708,6 @@
 		// 	}
 		// },
 		methods: {
-			showLoading() {
-				uni.showLoading({
-				    title: '加载中',
-					mask: true
-				});
-			},
-			
 			toDetails(item, type = 0, date) {
 				this.toRoute({
 					url: 'pages/goods/details',
@@ -806,9 +790,6 @@
 					limit,
 					...params
 				}).then(({data}) => {
-					
-					uni.hideLoading()
-					
 					// nowStep默认值为 -1
 					this.nowStep++
 					this.footMoreList[this.nowStep] = data.list
@@ -873,7 +854,6 @@
 						this.tabsList = this.tabsList.concat(data.category)
 						// "全民疯抢" 那六个
 						this.gridList = this.gridList.concat(data.menu)
-						console.log("数据：", this.gridList);
 						// 这里去第一个 全民疯抢
 						this.lottery = data.menu[0]
 						// console.log("lottery:", this.lottery);
@@ -926,7 +906,7 @@
 				});
 			},
 			// 天天爱抽奖--跳转去详情页
-			toDay(item) {
+			toDetails(item) {
 				// console.log("疯抢：", item);
 				this.$u.route({
 					url: 'pages/activity/details',

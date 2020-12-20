@@ -17,9 +17,10 @@
         <slot name="label"></slot>
         <view class="ad-oper">
           <view class="ad-price">
-            <text class="a-text">￥
+            <text class="a-text font-700">￥
               <text class="a-strong">{{ Number(price).toFixed(2) }}</text>
               <text class="a-del" v-if="showOld">￥{{ Number(oldPrice).toFixed(2) }}</text>
+			  <text class="text-red-light" v-if="item.spec_type">起</text>
             </text>
           </view>
           <view class="ad-btn">
@@ -37,6 +38,8 @@
 </template>
 
 <script>
+	
+	
 	export default {
     props: {
       src: {
@@ -99,6 +102,7 @@
 </script>
 
 <style lang="scss">
+	@import "/common/dev-yuchen.css";
 .advance-item {
   display: flex;
   .ad-img {
