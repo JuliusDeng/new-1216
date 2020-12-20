@@ -4,7 +4,7 @@
       <u-image :src="src" width="240rpx" height="100%" border-radius="10" mode="aspectFill"></u-image>
     </view>
     <view class="ad-info">
-      <text class="u-line-2 ad-title">
+      <text class="u-line-2 ad-title font-title font-700">
         {{ title }}
       </text>
       <view class="ad-set-oper">
@@ -17,13 +17,15 @@
         <slot name="label"></slot>
         <view class="ad-oper">
           <view class="ad-price">
-            <text class="a-text font-700">￥
-              <text class="a-strong">{{ Number(price).toFixed(2) }}</text>
-              <text class="a-del" v-if="showOld">￥{{ Number(oldPrice).toFixed(2) }}</text>
-			  <text class="text-red-light" v-if="item.spec_type">起</text>
+            <text class="a-text font-700">
+              <text class="a-strong text-red font-price font-700">￥{{ Number(price).toFixed(2) }}</text>
+			  <!-- <text class="text-red-light font-700" v-if="item.spec_type">起</text> -->
+			  <text class="text-red-light font-up ml-1" >起</text>
+              <!-- <text class="a-del font-ago" v-if="showOld">￥{{ Number(oldPrice).toFixed(2) }}</text> -->
+			  <text class="a-del font-ago" >￥599</text>
             </text>
           </view>
-          <view class="ad-btn">
+          <view class="ad-btn font-700">
             <u-button :type="btnType" size="mini" :custom-style="{color: '#333'}" shape="circle"
               v-if="showBtn"
               @click="handle">
@@ -117,7 +119,7 @@
     flex-direction: column;
     max-width: calc(100% - 260rpx);
     .ad-title {
-      font-size: $uni-font-size-base;
+      // font-size: $uni-font-size-base;
       color: #333;
     }
   }
@@ -153,7 +155,7 @@
   }
 }
 .ad-count {
-  border: 2rpx solid $uni-color-error;
+  border: 1rpx solid $uni-color-error;
   width: 260rpx;
   text-align: center;
   display: flex;

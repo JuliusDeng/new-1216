@@ -24,7 +24,7 @@
 			</view>
 		</u-sticky> -->
 		<scroll-view class="position-fixed" style="height: 80rpx;z-index: 99;" >
-			<u-tabs name="cate_name" :bold="true" :list="tabsList" :current="tabsCurrent" @change="tabsChange"></u-tabs>
+			<u-tabs name="cate_name" font-size="32" :bold="true" :list="tabsList" :current="tabsCurrent" @change="tabsChange"></u-tabs>
 		</scroll-view>
 		<view class="bg-yellow" style="height: 80rpx;"></view>
 			
@@ -40,15 +40,17 @@
 			<!-- 八个分类 grid -->
 			<view class="grid-box">
 				<u-grid :col="4" :border="false">
-					<u-grid-item v-for="(item, index) in gridList" :key="index" @click="toRoute({
-						  url: item.url,
-						  params: {
-							title: item.name
-						  }
-						})">
-						<u-icon :name="item.pic" :size="56"></u-icon>
-						<view class="grid-text font-700 mt-1">{{ item.name }}</view>
-					</u-grid-item>
+					<view class="" style="padding-top: -20rpx;padding-bottom: -20rpx;">
+						<u-grid-item v-for="(item, index) in gridList" :key="index" @click="toRoute({
+							  url: item.url,
+							  params: {
+								title: item.name
+							  }
+							})" >
+							<u-icon :name="item.pic" :size="68"></u-icon>
+							<view class="grid-text font-700 mt-1 font-title">{{ item.name }}</view>
+						</u-grid-item>
+					</view>
 				</u-grid>
 			</view>
 
@@ -104,17 +106,17 @@
 
 					<!-- 图下文字 -->
 					<view class="mx-1">
-						<view class="text-elli-two w-100">{{lotteryDetail.store_name}}</view>
+						<view class="text-elli-two w-100 font-title">{{lotteryDetail.store_name}}</view>
 						<view class="mt-1">
-							<text class="text-red font-20">价值</text>
-							<text class="text-red font-30 ml-1">￥{{lotteryDetail.coupon_price}}</text>
+							<text class="text-red font-member">价值</text>
+							<text class="text-red font-price ml-1">￥{{lotteryDetail.coupon_price}}</text>
 						</view>
 						<view class="d-flex j-sb my-2">
-							<view class="text-light-muted font-20">
+							<view class="text-light-muted font-member">
 								<text>{{lotteryDetail.activite_endtime}}</text>
 								<text class="ml-1">{{lotteryDetail.title}}</text>
 							</view>
-							<view class="text-light-muted font-20">
+							<view class="text-light-muted font-member">
 								{{lotteryDetail.join_people}}人已参与
 							</view>
 						</view>
@@ -148,7 +150,7 @@
 				</view>
 				<!-- 轮播图 -->
 				<swiper :indicator-dots="false" :autoplay="true" :interval="3000" :duration="1000" :circular="true" :current="cardSwiper1"
-				 @change="changeCardSwiper1" style="height: 520rpx;">
+				 @change="changeCardSwiper1" style="height: 550rpx;">
 					<swiper-item v-for="(item, index) in footMoreList[1]" :key="index" class="mx-2 rounded-8"
 					@click="toRoute({
 						url: 'pages/goods/details',
@@ -159,15 +161,16 @@
 						<image :src="item.image" class="rounded-8" style="width: 710rpx; height: 330rpx;"></image>
 						<!-- 图下文字 -->
 						<view class="" style="width: 710rpx;">
-							<text class="text-elli-two my-1">{{ item.store_name}}</text>
+							<text class="text-elli-two my-1 font-title">{{ item.store_name}}</text>
 							<view class="d-flex j-sb a-center">
 								<!-- 左侧 -->
 								<view class="my-1">
 									<member v-if="item.vip_price">会员省{{ (item.price - item.vip_price).toFixed(2) }}元</member>
-									<view class="d-flex font-20 mt-1">
-										<text class="text-red font-700 font-25 mx-1">￥{{item.price}}</text>
-										<text class="text-red-light" v-if="item.spec_type">起</text>
-										<text class="text-through text-muted mr-1">￥{{item.ot_price}}</text>
+									<view class="d-flex a-center font-20 mt-1">
+										<text class="text-red font-700 font-price mx-1">￥{{item.price}}</text>
+										<text class="text-red-light font-up" v-if="item.spec_type">起</text>
+										
+										<text class="text-through text-muted mr-1 font-ago">￥{{item.ot_price}}</text>
 										<!-- css写左箭头 -->
 										<arrow>{{ ((item.price / item.ot_price) * 10).toFixed(1)  }}折</arrow>
 									</view>
@@ -230,8 +233,8 @@
 						<!-- 右侧 -->
 						<view class="d-flex flex-column j-sb" style="width: 420rpx;">
 							<view>
-								<view class="text-elli-two">{{item.store_name}}</view>
-								<arrow mtop="mt-1">{{ ((item.price / item.ot_price) * 10).toFixed(1)  }}折</arrow>
+								<view class="text-elli-two font-700 font-title">{{item.store_name}}</view>
+								<arrow mtop="mt-1"style="margin-left: -20rpx;">{{ ((item.price / item.ot_price) * 10).toFixed(1)  }}折</arrow>
 							</view>
 
 							<view class="d-flex j-sb ">
@@ -384,19 +387,22 @@
 						}
 					})">
 						<image :src="item.image" style="width: 340rpx;height: 220rpx;"></image>
-						<view class="text-elli-two font-700">{{item.store_name}}</view>
+						<view class="text-elli-two font-700 font-title">{{item.store_name}}</view>
 					
 						<view class="d-flex j-sb ">
 							<view>
 								<member v-if="item.vip_price">会员省{{ (item.price - item.vip_price).toFixed(2) }}元</member>
-								<view class="d-flex font-20 mt-1">
-									<text class="text-red font-700 font-25 mx-1">￥{{item.price}}</text>
-									<text class="text-red-light" v-if="item.spec_type">起</text>
+								<view class="d-flex a-center font-20 mt-1">
+									<text class="text-red font-700 font-price mx-1">￥{{item.price}}</text>
+									<text class="text-red-light font-up" v-if="item.spec_type">起</text>
 									<!-- <text class="text-red-light">起</text> -->
+									<!-- 原价 -->
+									<text class="text-through text-muted mr-1 font-ago">￥{{item.ot_price}}</text>
 								</view>
 
 							</view>
 						</view>
+						
 					</view>
 				</view>
 			</view>
@@ -433,16 +439,19 @@
 						}
 					})">
 						<image :src="item.image" style="width: 340rpx;height: 220rpx;"></image>
-						<view class="text-elli-two">{{item.store_name}}</view>
+						<view class="text-elli-two font-700 font-title">{{item.store_name}}</view>
 					
 						<view class="d-flex j-sb ">
 							<view>
 								<member v-if="item.vip_price">会员省{{ (item.price - item.vip_price).toFixed(2) }}元</member>
-								<view class="d-flex font-20 mt-1">
-									<text class="text-red font-700 font-25 mx-1">￥{{item.price}}</text>
-									<text class="text-red-light" v-if="item.spec_type">起</text>
+								<view class="d-flex a-center font-20 mt-1">
+									<text class="text-red font-700 font-price mx-1">￥{{item.price}}</text>
+									<text class="text-red-light font-up" v-if="item.spec_type">起</text>
 									<!-- <text class="text-red-light">起</text> -->
+									<!-- 原价 -->
+									<text class="text-through text-muted mr-1 font-ago">￥{{item.ot_price}}</text>
 								</view>
+						
 							</view>
 						</view>
 					</view>
@@ -481,18 +490,22 @@
 						}
 					})">
 						<image :src="item.image" style="width: 340rpx;height: 220rpx;"></image>
-						<view class="text-elli-two">{{item.store_name}}</view>
-					
+						<view class="text-elli-two font-700 font-title">{{item.store_name}}</view>
+											
 						<view class="d-flex j-sb ">
 							<view>
 								<member v-if="item.vip_price">会员省{{ (item.price - item.vip_price).toFixed(2) }}元</member>
-								<view class="d-flex font-20 mt-1">
-									<text class="text-red font-700 font-25 mx-1">￥{{item.price}}</text>
-									<text class="text-red-light" v-if="item.spec_type">起</text>
+								<view class="d-flex a-center font-20 mt-1">
+									<text class="text-red font-700 font-price mx-1">￥{{item.price}}</text>
+									<text class="text-red-light font-up" v-if="item.spec_type">起</text>
 									<!-- <text class="text-red-light">起</text> -->
+									<!-- 原价 -->
+									<text class="text-through text-muted mr-1 font-ago">￥{{item.ot_price}}</text>
 								</view>
+						
 							</view>
 						</view>
+						
 					</view>
 				</view>
 			</view>
@@ -529,18 +542,22 @@
 						}
 					})">
 						<image :src="item.image" style="width: 340rpx;height: 220rpx;"></image>
-						<view class="text-elli-two">{{item.store_name}}</view>
-					
+						<view class="text-elli-two font-700 font-title">{{item.store_name}}</view>
+											
 						<view class="d-flex j-sb ">
 							<view>
 								<member v-if="item.vip_price">会员省{{ (item.price - item.vip_price).toFixed(2) }}元</member>
-								<view class="d-flex font-20 mt-1">
-									<text class="text-red font-700 font-25 mx-1">￥{{item.price}}</text>
-									<text class="text-red-light" v-if="item.spec_type">起</text>
+								<view class="d-flex a-center font-20 mt-1">
+									<text class="text-red font-700 font-price mx-1">￥{{item.price}}</text>
+									<text class="text-red-light font-up" v-if="item.spec_type">起</text>
 									<!-- <text class="text-red-light">起</text> -->
+									<!-- 原价 -->
+									<text class="text-through text-muted mr-1 font-ago">￥{{item.ot_price}}</text>
 								</view>
+						
 							</view>
 						</view>
+						
 					</view>
 				</view>
 			</view>
@@ -568,7 +585,7 @@
 				</view>
 				<!-- 轮播图 -->
 				<swiper :indicator-dots="false" :autoplay="true" :interval="3000" :duration="1000" :circular="true" :current="cardSwiper2"
-				 @change="changeCardSwiper2" style="height: 520rpx;">
+				 @change="changeCardSwiper2" style="height: 550rpx;">
 					<swiper-item v-for="(item, index) in footMoreList[11]" :key="index" class="mx-2 rounded-8"
 					@click="toRoute({
 						url: 'pages/goods/details',
@@ -579,15 +596,16 @@
 						<image :src="item.image" class="rounded-8" style="width: 710rpx; height: 330rpx;"></image>
 						<!-- 图下文字 -->
 						<view class="" style="width: 710rpx;">
-							<text class="text-elli-two my-1">{{ item.store_name}}</text>
+							<text class="text-elli-two my-1 font-title">{{ item.store_name}}</text>
 							<view class="d-flex j-sb a-center">
 								<!-- 左侧 -->
 								<view class="my-1">
 									<member v-if="item.vip_price">会员省{{ (item.price - item.vip_price).toFixed(2) }}元</member>
-									<view class="d-flex font-20 mt-1">
-										<text class="text-red font-700 font-25 mx-1">￥{{item.price}}</text>
-										<text class="text-red-light" v-if="item.spec_type">起</text>
-										<text class="text-through text-muted mr-1">￥{{item.ot_price}}</text>
+									<view class="d-flex a-center font-20 mt-1">
+										<text class="text-red font-700 font-price mx-1">￥{{item.price}}</text>
+										<text class="text-red-light font-up" v-if="item.spec_type">起</text>
+										
+										<text class="text-through text-muted mr-1 font-ago">￥{{item.ot_price}}</text>
 										<!-- css写左箭头 -->
 										<arrow>{{ ((item.price / item.ot_price) * 10).toFixed(1)  }}折</arrow>
 									</view>
@@ -959,7 +977,7 @@
 		height: 100%;
 
 		.search-text {
-			font-size: $uni-font-size-base;
+			font-size: 27rpx;
 			padding: 0 $gutter;
 			width: 250rpx;
 		}

@@ -7,7 +7,7 @@
 		border-color: transparent  #fee9eb transparent  transparent ;
 		z-index: 99;
 		"></view>
-		<text class="text-red-light px-1" style="background: #fee9eb;">
+		<text class="text-red-light px-1 font-sale" style="background: #fee9eb;">
 			<slot/>
 		</text>
 	</view>

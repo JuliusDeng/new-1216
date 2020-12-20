@@ -3,32 +3,31 @@
     <u-image :src="src" height="200rpx" width="100%" :mode="mode" border-radius="10"></u-image>
     <view class="goods-info">
       <view class="goods-info-text u-line-2">
-        <text class="g-text">{{ title }}</text>
+        <text class="g-text font-700 font-title">{{ title }}</text>
       </view>
     </view>
 	<!-- 会员省 -->
-	<view  class="border-dark d-flex ml-2" :class="mtop" style="width: 180rpx;height: 32rpx; "
+	<view  class="border-dark d-flex ml-2" :class="mtop" style="width: 200rpx;height: 32rpx; "
 	v-if="vip_price">
 	<!-- <view class="border-dark d-flex " :class="mtop" style="height: 32rpx; ">	 -->
 		<text class="font-20 font-700 d-flex j-center" style="background: #403835;width: 36rpx;color: #efaa89;">V</text>
-		<text class="font-20 text-dark d-flex j-center w-100">
+		<text class="font-member text-dark d-flex a-center j-center w-100">
 			会员省{{ (price - vip_price).toFixed(2) }}元
 		</text>
 	</view>
 	
     <view class="goods-price">
-      <text class="goods-price-small red">￥</text>
-      <text class="goods-price-strong">{{ price }}</text>
+      <text class="goods-price-strong text-red font-price">￥{{ price }}</text>
 	  <!-- <text class="goods-price-strong">{{ 55 }}</text> -->
-	  <text class="text-red-light font-20 ml-1" v-if="item.spec_type">起</text>
+	  <text class="text-red-light font-up ml-1" v-if="item.spec_type">起</text>
 	  <!-- <text class="text-red-light font-20 ml-1" >起</text> -->
-      <text class="text-del u-margin-left-10">{{ oPrice }}</text>
+      <text class="text-del u-margin-left-10 font">{{ oPrice }}</text>
 	  <!-- <text class="text-del u-margin-left-10">{{ 66 }}</text> -->
-      <view class="goods-btn">
+      <!-- <view class="goods-btn">
         <u-button type="warning" size="mini" shape="circle" :custom-style="{color: '#333'}" 
           v-if="showBtn" @click="handle">抢购</u-button>
         <text class="g-small" v-if="rightText">{{ rightText }}</text>
-      </view>
+      </view> -->
     </view>
   </view>
 </template>

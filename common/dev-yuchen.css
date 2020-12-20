@@ -83,10 +83,16 @@ body{
 .hx-100{ height: 100%;}
 .h-50{ width: 625upx; }
 /*4 字体__ 字体大小*/
+
+
+
 .font-10{ font-size: 10rpx; }
 .font-15 { font-size: 15rpx;}
 .font-20 { font-size: 20rpx;}
+.font-23 { font-size: 23rpx;}
 .font-25 { font-size: 25rpx;}
+.font-26 { font-size: 26rpx;}
+.font-28 { font-size: 28rpx;}
 .font-30 { font-size: 30rpx;}
 .font-32 { font-size: 32rpx;}
 .font-33 { font-size: 33rpx;}
@@ -604,7 +610,7 @@ body{
 
 /* 深色背景 15种 */
 .bg-red {
-	background-color: #e54d42;
+	background-color: #ff411d;
 }
 
 .bg-orange {
@@ -777,3 +783,26 @@ body{
 	-webkit-box-orient:vertical;
 	-webkit-line-clamp:2;
 }
+
+
+/*  导航选显卡 */
+.font-nav{ font-size: 28rpx; } 
+
+/* 标题 */
+.font-title{ font-size: 30rpx; }
+
+/* 会员省 */
+.font-member{ font-size: 22rpx; }
+
+/* 价格 */
+.font-price{ font-size: 32rpx; }
+
+/* "起"字 */
+.font-up{ font-size: 24rpx; }
+
+/* 原价 */
+.font-ago{ font-size: 22rpx; }
+
+
+/* 打折 */
+.font-sale{ font-size: 22rpx; }

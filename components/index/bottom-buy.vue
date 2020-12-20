@@ -1,5 +1,5 @@
 <template>
-	<view class="text-white bg-red rounded-8 px-2 d-flex a-center j-center" style="height: 60rpx">
+	<view class="text-white bg-red rounded-36  d-flex a-center j-center font-member" style="width: 140rpx;height: 60rpx">
 		<slot></slot>
 	</view>
 </template>
