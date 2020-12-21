@@ -80,7 +80,7 @@
 			</view>
 
 			<!-- 天天爱抽奖 -->
-			<view>
+			<view v-if="lotterys > 0">
 				<view class="title-box">
 					<view class="line line-top"></view>
 					<text class="font-700">⭐️ 天天爱抽奖</text>
@@ -624,7 +624,7 @@
 
 
 			<!-- 底部技术支持栏 foot logo -->
-			<view class="logo-box">
+			<view class="logo-box" v-if="baseInfo.site_name">
 				<text class="text">{{ baseInfo.site_name }}技术支持</text>
 			</view>
 			<!-- loadmore -->
@@ -662,7 +662,6 @@
 		},
 		data() {
 			return {
-				textElli: "【美颜美体.云景清吧】就是打开了司法鉴定所冷风机SDK就发对抗赛垃圾房东说开了房间的思考了第三方极乐迪斯科附近的抗衰老减肥的说的",
 				hot: [],
 				showReindex: true,
 				tabsList: [{
@@ -691,8 +690,10 @@
 				// 抽奖
 				lottery: "",
 				lotteryDetail: "",
+				lotterys: 0,
+				
 				// 数组-获取推荐商品
-				dataArr: []
+				dataArr: [],
 
 			}
 		},
@@ -738,7 +739,7 @@
 			showLoading() {
 				uni.showLoading({
 				    title: '加载中',
-					mask: true
+					mask: false
 				});
 			},
 			
@@ -825,7 +826,6 @@
 					...params
 				}).then(({data}) => {
 					
-					uni.hideLoading()
 					
 					// nowStep默认值为 -1
 					this.nowStep++
@@ -836,6 +836,7 @@
 					// 递归  nowStep默认值为 -1 +1
 					if(this.nowStep < 10) {
 						this.getFootMore()
+						uni.hideLoading()
 					} else {
 						console.log("介绍打印：",this.footMoreList);
 						return false
@@ -939,7 +940,8 @@
 					page: 1,
 					limit: 1
 				}).then(res => {
-					// console.log(res);
+					console.log("天天爱抽奖：",res);
+					this.lotterys = res.data.list.length
 					this.lotteryDetail = res.data.list[0];
 				});
 			},

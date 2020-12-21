@@ -10,7 +10,8 @@
           :show-old="false"
           :disabled="item.total_count && !item.remain_count"
           :btn-type="item.total_count && !item.remain_count ? 'error' : 'warning'"
-          :btn-text="item.total_count && !item.remain_count ? '已抢完' : '抢购中'"
+          :btn-text="item.total_count && !item.remain_count ? '已抢完' : 
+            !item.join ? '抢购中' : hasLogin ? '已参与' : '抢购中'"
           :nums="item.join_people"
           @click="toDetails(item)">
           <text v-if="item.total_count">剩余{{ item.remain_count }}份<text>/共{{ item.total_count }}份</text></text>
@@ -36,6 +37,11 @@
     onLoad() {
       this.getList()
     },
+    computed: {
+      hasLogin () {
+        return this.$store.state.hasLogin
+      }
+    },
     methods: {
       toDetails (item) {
         this.$u.route({
@@ -50,7 +56,11 @@
       getList () {
         if (this.loadStatus == 'loadmore') {
           this.loadStatus = 'loading'
-          this.$u.get('/api/store/product/getCouponProjectList', {
+          let url = '/api/store/product/getCouponProjectList'
+          if (this.hasLogin) {
+            url = '/api/store/product/getPowerCouponProjectList'
+          }
+          this.$u.get(url, {
             page: this.page++,
             limit: this.limit
           }).then(({ data }) => {
