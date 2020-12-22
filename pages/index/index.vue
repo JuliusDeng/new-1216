@@ -55,18 +55,24 @@
 			</view>
 
 			<!-- 今日商品秒杀 -->
+			
 			<view class="new-goods" v-if="footMoreList[0].length > 0">
-				<view class="title-box">
-					<!-- <image src="/static/ico-star.png" mode="aspectFit" class="ico-star"></image> -->
-					<view class="line line-top"></view>
-					<text class="font-700">⭐️ 今日商品秒杀</text>
-					<!-- <text class="label">每天9:30，准时开售</text> -->
-					<view class="sk-more">
+				<!-- 标题栏 -->
+				<view class="mx-2 d-flex j-sb a-end" style="height: 60rpx;">
+					<view class="position-relative"  style="width: 270rpx;">
+						<view class="d-flex bg-gradual-orange rounded-12 position-absolute bottom-0 left-0 w-100"
+						style="height: 16rpx;"></view>	
+						<view class="d-flex  position-absolute bottom-0 left-0 font-700 font-35" >
+							⭐ 今日商品秒杀
+						</view>
+					</view>
+					<view class="font-23 text-muted d-flex ">
 						<navigator url="../goods/seckill">
 							查看更多<u-icon name="arrow-right" size="24"></u-icon>
 						</navigator>
-					</view>
+					</view>	
 				</view>
+				<!-- 内容 -->
 				<view class="new-goods-list">
 					<view class="new-goods-item" v-for="(item, index) in footMoreList[0]" :key="index" @click="toDetails(item, 1, datatime)">
 						<advance-item :src="item.image" :title="item.store_name" :price="item.price" :show-old="false" :timestamp="datatime"
@@ -78,23 +84,29 @@
 					</view>
 				</view>
 			</view>
+			
+			
 
-			<!-- 天天爱抽奖 -->
+			<!-- 天天爱抽奖 v-if="lotterys < 0" -->
 			<view v-if="lotterys > 0">
-				<view class="title-box">
-					<view class="line line-top"></view>
-					<text class="font-700">⭐️ 天天爱抽奖</text>
-					<view class="sk-more" @click="toRoute({
-						  url: lottery.url,
-						  params: {
-							title: lottery.name
-						  }
-						})">
-						<view>
-							查看更多<u-icon name="arrow-right" size="24"></u-icon>
+				<view class="mx-2 d-flex j-sb a-end" style="height: 60rpx;">
+					<view class="position-relative" style="width: 236rpx;">
+						<view class="d-flex bg-gradual-orange rounded-12 position-absolute bottom-0 left-0 w-100" style="height: 16rpx;"></view>
+						<view class="d-flex  position-absolute bottom-0 left-0 font-700 font-35">
+							⭐ 天天爱抽奖
 						</view>
 					</view>
+					<view class="font-23 text-muted d-flex "
+					@click="toRoute({
+										  url: lottery.url,
+										  params: {
+											title: lottery.name
+										  }
+										})">
+						查看更多<u-icon name="arrow-right" size="24"></u-icon>
+					</view>
 				</view>
+				
 				<view class="mx-2 py-2 shadow-nom" @click="toDay(lotteryDetail)">
 					<view class="position-relative">
 						<image :src="lotteryDetail.image" style="height: 390rpx;width: 710rpx;" class="d-block"></image>
@@ -106,7 +118,7 @@
 
 					<!-- 图下文字 -->
 					<view class="mx-1">
-						<view class="text-elli-two w-100 font-title">{{lotteryDetail.store_name}}</view>
+						<view class="mt-1 text-elli-two w-100 font-title">{{lotteryDetail.store_name}}</view>
 						<view class="mt-1">
 							<text class="text-red font-member">价值</text>
 							<text class="text-red font-price ml-1">￥{{lotteryDetail.coupon_price}}</text>
@@ -135,40 +147,42 @@
 			</view>
 
 			<!-- 2 吃喝玩乐推荐 card swiper -->
-			<view class="card-swiper mb-2 pb-2 border-bottom" v-if="footMoreList[1].length > 0">
-				<view class="card-top">
-					<view class="t-left">
-						<!-- <image src="/static/ico-star.png" mode="aspectFit" class="ico-star"></image> -->
-						<text class="title font-700">⭐️ 吃喝玩乐推荐</text>
-						<view class="line"></view>
-						<!-- <text class="label">更好的时代，值得遇见更好的你</text> -->
+			<view class="card-swiper mb-2 " v-if="footMoreList[1].length > 0">
+				<view class="mx-2 d-flex j-sb a-end mb-2" style="height: 60rpx;">
+					<view class="position-relative" style="width: 270rpx;">
+						<view class="d-flex bg-gradual-orange rounded-12 position-absolute bottom-0 left-0 w-100" style="height: 16rpx;"></view>
+						<view class="d-flex  position-absolute bottom-0 left-0 font-700 font-35">
+							⭐️ 吃喝玩乐推荐
+						</view>
 					</view>
 					<view class="t-right">
 						<text class="bold">{{ cardSwiper1+1 }}</text>
 						<text class="" style="padding-bottom: 6rpx;">/{{ footMoreList[1].length }}</text>
 					</view>
 				</view>
+				
 				<!-- 轮播图 -->
 				<swiper :indicator-dots="false" :autoplay="true" :interval="3000" :duration="1000" :circular="true" :current="cardSwiper1"
-				 @change="changeCardSwiper1" style="height: 550rpx;">
-					<swiper-item v-for="(item, index) in footMoreList[1]" :key="index" class="mx-2 rounded-8"
+				 @change="changeCardSwiper1" style="height: 610rpx;">
+					<swiper-item v-for="(item, index) in footMoreList[1]" :key="index"
+					 class="mx-2 rounded-8"
 					@click="toRoute({
 						url: 'pages/goods/details',
 						params: {
 						  id: item.product_id
 						}
 					  })">
-						<image :src="item.image" class="rounded-8" style="width: 710rpx; height: 330rpx;"></image>
+						<image :src="item.image" class="rounded-8" style="width: 710rpx; height: 390rpx;"></image>
 						<!-- 图下文字 -->
-						<view class="" style="width: 710rpx;">
-							<text class="text-elli-two my-1 font-title">{{ item.store_name}}</text>
+						<view class="" style="width: 710rpx;height: 190rpx;">
+							<text class="text-elli-two my-1 font-title" style="height: 80rpx;">{{ item.store_name}}</text>
 							<view class="d-flex j-sb a-center">
 								<!-- 左侧 -->
 								<view class="my-1">
 									<member v-if="item.vip_price">会员省{{ (item.price - item.vip_price).toFixed(2) }}元</member>
-									<view class="d-flex a-center font-20 mt-1">
-										<text class="text-red font-700 font-price mx-1">￥{{item.price}}</text>
-										<text class="text-red-light font-up" v-if="item.spec_type">起</text>
+									<view class="d-flex a-center font-20" style="height: 50rpx;">
+										<text class="text-red font-700 font-price mr-1">￥{{item.price}}</text>
+										<text class="text-red-light font-up mr-1" v-if="item.spec_type">起</text>
 										
 										<text class="text-through text-muted mr-1 font-ago">￥{{item.ot_price}}</text>
 										<!-- css写左箭头 -->
@@ -198,29 +212,33 @@
 			</swiper> -->
 			<view class="mx-2 my-1" v-if="hot[3].pic">
 				<!-- <image :src="hot[1].pic" style="width: 710rpx;height: 360rpx;" class="rounded"></image> -->
-				<image :src="hot[3].pic" style="width: 710rpx;height: 360rpx;" class="rounded"></image>
+				<image :src="hot[3].pic" style="width: 710rpx;height: 300rpx;" class="rounded"></image>
 			</view>
 
 
 			<!-- 3 必吃美食|优选Top -->
 			<view class="goods-list" v-if="footMoreList[2].length > 0">
-				<view class="title-box">
-					<view class="line line-top" style="width: 370rpx;"></view>
-					<text class="font-700">⭐️ 必吃美食|优选Top</text>
-					<view class="secmore" @click="toRoute({
-					  url: 'pages/goods/list', 
-					  params: {
-						title: '必吃美食|优选Top',
-						hot_type: 'good'
-					  }
-					})">
-						<text>更多推荐</text>
-						<u-icon name="arrow-right" size="24"></u-icon>
+				<view class="mx-2 d-flex j-sb a-end" style="height: 60rpx;">
+					<view class="position-relative" style="width: 350rpx;">
+						<view class="d-flex bg-gradual-orange rounded-12 position-absolute bottom-0 left-0 w-100" style="height: 16rpx;"></view>
+						<view class="d-flex  position-absolute bottom-0 left-0 font-700 font-35">
+							⭐️ 必吃美食|优选Top
+						</view>
+					</view>
+					<view class="font-23 text-muted d-flex "
+					@click="toRoute({
+									  url: 'pages/goods/list', 
+									  params: {
+										title: '必吃美食|优选Top',
+										hot_type: 'good'
+									  }
+									})">
+						更多推荐<u-icon name="arrow-right" size="24"></u-icon>
 					</view>
 				</view>
 
 				<!-- 内容 -->
-				<view class="mx-2 p-2 shadow rounded-8 " style="width: 710rpx;">
+				<view class="mx-2 mt-2 p-2 shadow rounded-8 " style="width: 710rpx;">
 					<view class="d-flex j-sb mb-2" v-for="(item, index) in footMoreList[2]" :key="index"
 					@click="toRoute({
 						url: 'pages/goods/details',
@@ -231,16 +249,28 @@
 						<!-- 左图 -->
 						<image :src="item.image" style="width: 220rpx;height: 220rpx;"></image>
 						<!-- 右侧 -->
-						<view class="d-flex flex-column j-sb" style="width: 420rpx;">
-							<view>
-								<view class="text-elli-two font-700 font-title">{{item.store_name}}</view>
-								<arrow mtop="mt-1"style="margin-left: -20rpx;">{{ ((item.price / item.ot_price) * 10).toFixed(1)  }}折</arrow>
+						<view class="d-flex flex-column j-sb" style="width: 420rpx;height: 220rpx;">
+							<view style="height: 125rpx;">
+								<view class="text-elli-two font-700 font-title" style="height: 82rpx;">{{item.store_name}}</view>
+								<view  class="d-flex a-center font-20" style="height: 40rpx;">
+									<view class="text-red-light" style="
+									width: 0;
+									height: 0;
+									border: 10px solid #fee9eb;
+									border-color: transparent  #fee9eb transparent  transparent ;
+									z-index: 99;
+									"></view>
+									<text class="text-red-light px-1 font-sale" style="background: #fee9eb;">
+										{{ ((item.price / item.ot_price) * 10).toFixed(1)  }}折
+									</text>
+								</view>
+								<!-- <arrow style="margin-left: -20rpx;">{{ ((item.price / item.ot_price) * 10).toFixed(1)  }}折</arrow> -->
 							</view>
 
 							<view class="d-flex j-sb ">
 								<view class="">
 									<member v-if="item.vip_price">会员省{{ (item.price - item.vip_price).toFixed(2) }}元</member>
-									<text class="text-red font-700 font-25 mx-1">￥{{item.price}}</text>
+									<text class="text-red font-700 font-25 mr-1">￥{{item.price}}</text>
 									<text class="text-red-light" v-if="item.spec_type">起</text>
 								</view>
 								<view >
@@ -261,28 +291,31 @@
 			 <!-- 广告5 -->
 			<view class="mx-2 my-3" v-if="hot[4].pic">
 				<!-- <image :src="hot[2].pic" style="width: 710rpx;height: 260rpx;" class="rounded"></image> -->
-				<image :src="hot[4].pic" style="width: 710rpx;height: 260rpx;" class="rounded"></image>
+				<image :src="hot[4].pic" style="width: 710rpx;height: 240rpx;" class="rounded"></image>
 			</view>
 			<!-- 广告6 -->
 			<view class="mx-2 mb-3" v-if="hot[5].pic">
 				<!-- <image :src="hot[3].pic" style="width: 710rpx;height: 430rpx;" class="rounded"></image> -->
-				<image :src="hot[5].pic" style="width: 710rpx;height: 430rpx;" class="rounded"></image>
+				<image :src="hot[5].pic" style="width: 710rpx;height: 360rpx;" class="rounded"></image>
 			</view>
 			
 			<!-- 4 网红风味|吃货必备 本周上新 -->
 			<view class="goods-list" v-if="footMoreList[3].length > 0">
-				<view class="title-box">
-					<view class="line line-top" style="width: 370rpx;"></view>
-					<text class="font-700">⭐️ 网红风味|吃货必备</text>
-					<view class="secmore" @click="toRoute({
+				<view class="mx-2 d-flex j-sb a-end" style="height: 60rpx;">
+					<view class="position-relative" style="width: 350rpx;">
+						<view class="d-flex bg-gradual-orange rounded-12 position-absolute bottom-0 left-0 w-100" style="height: 16rpx;"></view>
+						<view class="d-flex  position-absolute bottom-0 left-0 font-700 font-35">
+							⭐️ 网红风味|吃货必备
+						</view>
+					</view>
+					<view class="font-23 text-muted d-flex " @click="toRoute({
 					  url: 'pages/goods/list', 
 					  params: {
 						pid: '314',
 						title: '网红风味|吃货必备',
 					  }
 					})">
-						<text>向右滑动查看</text>
-						<u-icon name="arrow-right" size="24"></u-icon>
+						向右滑动查看<u-icon name="arrow-right" size="24"></u-icon>
 					</view>
 				</view>
 				<scroll-view scroll-x="true">
@@ -297,18 +330,21 @@
 
 			<!-- 5 火锅|一起涮火锅 本周上新 -->
 			<view class="goods-list" v-if="footMoreList[4].length > 0">
-				<view class="title-box">
-					<view class="line line-top" style="width: 330rpx;"></view>
-					<text class="font-700">⭐️ 火锅|一起涮火锅</text>
-					<view class="secmore" @click="toRoute({
-					  url: 'pages/goods/list', 
-					  params: {
-						title: '火锅|一起涮火锅',
-						pid: '325'
-					  }
-					})">
-						<text>向右滑动查看</text>
-						<u-icon name="arrow-right" size="24"></u-icon>
+				<view class="mx-2 d-flex j-sb a-end" style="height: 60rpx;">
+					<view class="position-relative" style="width: 350rpx;">
+						<view class="d-flex bg-gradual-orange rounded-12 position-absolute bottom-0 left-0 w-100" style="height: 16rpx;"></view>
+						<view class="d-flex  position-absolute bottom-0 left-0 font-700 font-35">
+							⭐️ 火锅|一起涮火锅
+						</view>
+					</view>
+					<view class="font-23 text-muted d-flex " @click="toRoute({
+									  url: 'pages/goods/list',
+									  params: {
+									  title: '火锅|一起涮火锅',
+									  pid: '325'
+									  }
+									})">
+						向右滑动查看<u-icon name="arrow-right" size="24"></u-icon>
 					</view>
 				</view>
 				<scroll-view scroll-x="true">
@@ -323,19 +359,21 @@
 
 			<!-- 6 烤肉|烤鱼|烧烤吃不腻 本周上新 -->
 			<view class="goods-list" v-if="footMoreList[5].length > 0">
-				<view class="title-box">
-					<!-- <image src="/static/ico-star.png" mode="aspectFit" class="ico-star"></image> -->
-					<view class="line line-top" style="width: 410rpx;"></view>
-					<text class="font-700">⭐️ 烤肉|烤鱼|烧烤吃不腻</text>
-					<view class="secmore" @click="toRoute({
-					  url: 'pages/goods/list', 
-					  params: {
-						title: '烤肉|烤鱼|烧烤吃不腻',
-						pid: '326'
-					  }
-					})">
-						<text>向右滑动查看</text>
-						<u-icon name="arrow-right" size="24"></u-icon>
+				<view class="mx-2 d-flex j-sb a-end" style="height: 60rpx;">
+					<view class="position-relative" style="width: 350rpx;">
+						<view class="d-flex bg-gradual-orange rounded-12 position-absolute bottom-0 left-0 w-100" style="height: 16rpx;"></view>
+						<view class="d-flex  position-absolute bottom-0 left-0 font-700 font-35">
+							⭐️ 烤肉|烤鱼|烧烤吃不腻
+						</view>
+					</view>
+					<view class="font-23 text-muted d-flex " @click="toRoute({
+									  url: 'pages/goods/list',
+									  params: {
+									  title: '烤肉|烤鱼|烧烤吃不腻',
+									  pid: '326'
+									  }
+									})">
+						向右滑动查看<u-icon name="arrow-right" size="24"></u-icon>
 					</view>
 				</view>
 				<scroll-view scroll-x="true">
@@ -362,24 +400,28 @@
 
 			<!-- 7 玩乐特惠专区 -->
 			<view class="goods-list" v-if="footMoreList[6].length > 0">
-				<view class="title-box">
-					<view class="line line-top" style="width: 410rpx;"></view>
-					<text class="font-700">⭐️ 玩乐特惠专区</text>
-					<view class="secmore" @click="toRoute({
-					  url: 'pages/goods/list',
-					  params: {
-					  title: '玩乐特惠专区',
-					  isvip: '1'
-					  }
-					})">
-						<text>更多推荐</text>
-						<u-icon name="arrow-right" size="24"></u-icon>
+				<view class="mx-2 d-flex j-sb a-end" style="height: 60rpx;">
+					<view class="position-relative" style="width: 270rpx;">
+						<view class="d-flex bg-gradual-orange rounded-12 position-absolute bottom-0 left-0 w-100" style="height: 16rpx;"></view>
+						<view class="d-flex  position-absolute bottom-0 left-0 font-700 font-35">
+							⭐️ 玩乐特惠专区
+						</view>
+					</view>
+					<view class="font-23 text-muted d-flex " @click="toRoute({
+									  url: 'pages/goods/list',
+									  params: {
+									  title: '玩乐特惠专区',
+									  isvip: '1'
+									  }
+									})">
+						更多推荐<u-icon name="arrow-right" size="24"></u-icon>
 					</view>
 				</view>
+				
 				<!-- 玩乐特惠专区内容 -->
-				<view class="px-2 d-flex j-sb flex-wrap">
+				<view class="px-2 d-flex j-sb flex-wrap ">
 					<!-- 750-40=710-660=50 -->
-					<view class="mb-1 border-bottom" style="width: 340rpx;height: 400rpx;" 
+					<view class="mb-2  border-bottom" style="width: 340rpx;height: 420rpx;" 
 					v-for="(item, index) in footMoreList[6]" :key="index" @click="toRoute({
 						url: 'pages/goods/details',
 						params: {
@@ -387,15 +429,20 @@
 						}
 					})">
 						<image :src="item.image" style="width: 340rpx;height: 220rpx;"></image>
-						<view class="text-elli-two font-700 font-title">{{item.store_name}}</view>
+						<!-- <view class="text-elli-two font-700 font-title my-1" style="height: 80rpx;">{{item.store_name}}</view> -->
+						<!-- 220 + 80 + 20 = 320 -->
+						<view class="text-elli-two font-700 font-title my-1" style="height: 80rpx;"
+						>圣诞节的反馈了所发生的快捷方式打开了就是的就是快乐副驾驶的房价快速的链接发的说法凉快圣诞节发生了大家胜多负少的解放路口史蒂夫</view>
 					
-						<view class="d-flex j-sb ">
+						<view class="d-flex j-sb " style="height: 110rpx;">
 							<view>
+								<!-- 32rpx -->
 								<member v-if="item.vip_price">会员省{{ (item.price - item.vip_price).toFixed(2) }}元</member>
-								<view class="d-flex a-center font-20 mt-1">
-									<text class="text-red font-700 font-price mx-1">￥{{item.price}}</text>
-									<text class="text-red-light font-up" v-if="item.spec_type">起</text>
-									<!-- <text class="text-red-light">起</text> -->
+								<!-- 420 -320 = 100 -32 = 68 -->
+								<view class="d-flex a-center font-20 mb-2">
+									<text class="text-red font-700 font-price mr-1 ">￥{{item.price}}</text>
+									<!-- <text class="text-red-light font-up mr-1" v-if="item.spec_type">起</text> -->
+									<text class="text-red-light font-up mr-1">起</text>
 									<!-- 原价 -->
 									<text class="text-through text-muted mr-1 font-ago">￥{{item.ot_price}}</text>
 								</view>
@@ -414,18 +461,21 @@
 			
 			<!-- 8 丽人美容|气质小仙女 -->
 			<view class="goods-list" v-if="footMoreList[7].length > 0">
-				<view class="title-box">
-					<view class="line line-top" style="width: 410rpx;"></view>
-					<text class="font-700">⭐️ 丽人美容|气质小仙女</text>
-					<view class="secmore" @click="toRoute({
-					  url: 'pages/goods/list',
-					  params: {
-					  title: '丽人美容|气质小仙女',
-					  pid: '313'
-					  }
-					})">
-						<text>更多推荐</text>
-						<u-icon name="arrow-right" size="24"></u-icon>
+				<view class="mx-2 d-flex j-sb a-end" style="height: 60rpx;">
+					<view class="position-relative" style="width: 350rpx;">
+						<view class="d-flex bg-gradual-orange rounded-12 position-absolute bottom-0 left-0 w-100" style="height: 16rpx;"></view>
+						<view class="d-flex  position-absolute bottom-0 left-0 font-700 font-35">
+							⭐️ 玩乐特惠专区
+						</view>
+					</view>
+					<view class="font-23 text-muted d-flex " @click="toRoute({
+									  url: 'pages/goods/list',
+									  params: {
+									  title: '丽人美容|气质小仙女',
+									  pid: '313'
+									  }
+									})">
+						向右滑动查看<u-icon name="arrow-right" size="24"></u-icon>
 					</view>
 				</view>
 				<!--  内容 -->
@@ -465,18 +515,21 @@
 			
 			<!-- 9 生活服务类专区 -->
 			<view class="goods-list" v-if="footMoreList[8].length > 0">
-				<view class="title-box">
-					<view class="line line-top" style="width: 410rpx;"></view>
-					<text class="font-700">⭐️ 生活服务类专区</text>
-					<view class="secmore" @click="toRoute({
-					  url: 'pages/goods/list',
-					  params: {
-					  title: '生活服务类专区',
-					  pid: '316'
-					  }
-					})">
-						<text>更多推荐</text>
-						<u-icon name="arrow-right" size="24"></u-icon>
+				<view class="mx-2 d-flex j-sb a-end" style="height: 60rpx;">
+					<view class="position-relative" style="width: 350rpx;">
+						<view class="d-flex bg-gradual-orange rounded-12 position-absolute bottom-0 left-0 w-100" style="height: 16rpx;"></view>
+						<view class="d-flex  position-absolute bottom-0 left-0 font-700 font-35">
+							⭐️ 生活服务类专区
+						</view>
+					</view>
+					<view class="font-23 text-muted d-flex " @click="toRoute({
+									 url: 'pages/goods/list',
+									 params: {
+									 title: '生活服务类专区',
+									 pid: '316'
+									 }
+									})">
+						向右滑动查看<u-icon name="arrow-right" size="24"></u-icon>
 					</view>
 				</view>
 				<!--  内容 -->
@@ -517,18 +570,21 @@
 			
 			<!-- 10 休闲娱乐专区 -->
 			<view class="goods-list" v-if="footMoreList[9].length > 0">
-				<view class="title-box">
-					<view class="line line-top" style="width: 410rpx;"></view>
-					<text class="font-700">⭐️ 休闲娱乐专区</text>
-					<view class="secmore" @click="toRoute({
-					  url: 'pages/goods/list',
-					  params: {
-					  title: '休闲娱乐专区',
-					  pid: '315'
-					  }
-					})">
-						<text>更多推荐</text>
-						<u-icon name="arrow-right" size="24"></u-icon>
+				<view class="mx-2 d-flex j-sb a-end" style="height: 60rpx;">
+					<view class="position-relative" style="width: 350rpx;">
+						<view class="d-flex bg-gradual-orange rounded-12 position-absolute bottom-0 left-0 w-100" style="height: 16rpx;"></view>
+						<view class="d-flex  position-absolute bottom-0 left-0 font-700 font-35">
+							⭐️ 休闲娱乐专区
+						</view>
+					</view>
+					<view class="font-23 text-muted d-flex " @click="toRoute({
+									  url: 'pages/goods/list',
+									  params: {
+									  title: '休闲娱乐专区',
+									  pid: '315'
+									  }
+									})">
+						向右滑动查看<u-icon name="arrow-right" size="24"></u-icon>
 					</view>
 				</view>
 				<!-- 休闲娱乐专区 内容 -->
@@ -571,21 +627,27 @@
 			
 			<!-- 11 亲子教育 -->
 			<view class="card-swiper" v-if="footMoreList[10].length > 0">
-				<view class="card-top">
-					<view class="t-left">
-						<!-- <image src="/static/ico-star.png" mode="aspectFit" class="ico-star"></image> -->
-						<text class="title font-700">⭐️ 亲子教育|快乐时光</text>
-						<view class="line"></view>
-						<!-- <text class="label">更好的时代，值得遇见更好的你</text> -->
+				<view class="mx-2 d-flex j-sb a-end" style="height: 60rpx;">
+					<view class="position-relative" style="width: 350rpx;">
+						<view class="d-flex bg-gradual-orange rounded-12 position-absolute bottom-0 left-0 w-100" style="height: 16rpx;"></view>
+						<view class="d-flex  position-absolute bottom-0 left-0 font-700 font-35">
+							⭐️ 亲子教育|快乐时光
+						</view>
 					</view>
-					<view class="t-right">
-						<text class="bold">{{ cardSwiper2+1 }}</text>
-						<text class="" style="padding-bottom: 6rpx;">/{{ footMoreList[10].length }}</text>
+					<view class="font-23 text-muted d-flex " @click="toRoute({
+									  url: 'pages/goods/list', 
+									  params: {
+										pid: '314',
+										title: '网红风味|吃货必备',
+									  }
+									})">
+						向右滑动查看<u-icon name="arrow-right" size="24"></u-icon>
 					</view>
 				</view>
 				<!-- 轮播图 -->
-				<swiper :indicator-dots="false" :autoplay="true" :interval="3000" :duration="1000" :circular="true" :current="cardSwiper2"
-				 @change="changeCardSwiper2" style="height: 550rpx;">
+				<!-- :current="cardSwiper2" -->
+				<swiper :indicator-dots="false" :autoplay="true" :interval="3000" :duration="1000" :circular="true" 
+				 @change="changeCardSwiper2" style="height: 550rpx;">  
 					<swiper-item v-for="(item, index) in footMoreList[11]" :key="index" class="mx-2 rounded-8"
 					@click="toRoute({
 						url: 'pages/goods/details',
@@ -713,14 +775,16 @@
 		},
 		onLoad() {
 			// 获取数据
-			this.getIndexData()
-			this.getFootMore()
+			// this.getIndexData()
+			// this.getFootMore()
+			
 			// if (this.indexLoadStatus == 'loadmore') {
 			// 	this.indexLoadStatus = 'loading'
 			// 	this.getFootMore()
 			// }
-			this.getSeckillTime()
-			this.showLottery()
+			
+			// this.getSeckillTime()
+			// this.showLottery()
 			
 			this.showLoading()
 			
@@ -735,6 +799,19 @@
 		// 		this.getList()
 		// 	}
 		// },
+		onShow() {
+			// 获取数据
+			this.getIndexData()
+			this.getFootMore()
+			
+			this.getSeckillTime()
+			this.showLottery()
+			
+			
+			// this.cardSwiper1 = 0
+			console.log("轮播index:",this.cardSwiper1);
+			// this.cardSwiper2 = 0
+		},
 		methods: {
 			showLoading() {
 				uni.showLoading({
@@ -830,7 +907,7 @@
 					// nowStep默认值为 -1
 					this.nowStep++
 					this.footMoreList[this.nowStep] = data.list
-					console.log("data:",data);
+					// console.log("data:",data);
 					console.log("this.nowStep：", this.nowStep)
 					console.log(`获取footMoreList[this.nowStep]:`, data);
 					// 递归  nowStep默认值为 -1 +1
@@ -892,7 +969,7 @@
 						this.tabsList = this.tabsList.concat(data.category)
 						// "全民疯抢" 那六个
 						this.gridList = this.gridList.concat(data.menu)
-						console.log("数据：", this.gridList);
+						// console.log("数据：", this.gridList);
 						// 这里去第一个 全民疯抢
 						this.lottery = data.menu[0]
 						// console.log("lottery:", this.lottery);
@@ -914,7 +991,7 @@
 			},
 			// 卡片切换
 			changeCardSwiper1({detail}) {
-				// console.log("cardSwiper111:", detail.current);
+				console.log("cardSwiper111:", detail);
 				this.cardSwiper1 = detail.current
 			},
 			changeCardSwiper2({detail}) {
@@ -930,9 +1007,6 @@
 				this.getList()
 			},
 			// swiper banner 切换
-			changeSwiper(index) {
-				this.swiperCurrent = index
-			},
 
 			// 11天天爱抽奖
 			showLottery() {
@@ -1107,7 +1181,7 @@
 		color: #333;
 		display: flex;
 		flex-direction: column;
-		padding-left: 10rpx;
+		padding-left: 20rpx;
 
 		.label {
 			font-size: $uni-font-size-sm;
@@ -1397,7 +1471,7 @@
 		border-radius: 10rpx;
 
 		&.line-top {
-			width: 260rpx;
+			// width: 260rpx;
 			bottom: 30rpx;
 		}
 	}

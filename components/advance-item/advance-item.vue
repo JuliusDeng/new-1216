@@ -1,7 +1,7 @@
 <template>
 	<view class="advance-item">
 		<view class="ad-img">
-      <u-image :src="src" width="240rpx" height="100%" border-radius="10" mode="aspectFill"></u-image>
+      <u-image :src="src" width="240rpx" height="170rpx" border-radius="10" mode="aspectFill"></u-image>
     </view>
     <view class="ad-info">
       <text class="u-line-2 ad-title font-title font-700">
@@ -19,10 +19,10 @@
           <view class="ad-price">
             <text class="a-text font-700">
               <text class="a-strong text-red font-price font-700">￥{{ Number(price).toFixed(2) }}</text>
-			  <!-- <text class="text-red-light font-700" v-if="item.spec_type">起</text> -->
-			  <text class="text-red-light font-up ml-1" >起</text>
-              <!-- <text class="a-del font-ago" v-if="showOld">￥{{ Number(oldPrice).toFixed(2) }}</text> -->
-			  <text class="a-del font-ago" >￥599</text>
+			  <text class="text-red-light font-up ml-1" v-if="item.spec_type">起</text>
+			  <!-- <text class="text-red-light font-up ml-1" >起</text> -->
+              <text class="a-del font-ago" v-if="showOld">￥{{ Number(oldPrice).toFixed(2) }}</text>
+			  <!-- <text class="a-del font-ago" >￥599</text> -->
             </text>
           </view>
           <view class="ad-btn font-700">

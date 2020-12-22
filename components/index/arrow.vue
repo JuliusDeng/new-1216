@@ -1,5 +1,5 @@
 <template>
-	<view  class="d-flex a-center font-20" :class="mtop">
+	<view  class="d-flex a-center font-20" :class="mtop" style="height: 40rpx;">
 		<view class="text-red-light" style="
 		width: 0;
 		height: 0;
