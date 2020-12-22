@@ -1,8 +1,8 @@
 <template>
   <view class="goods-list-item" @click="handle">
-    <u-image :src="src" height="200rpx" width="100%" :mode="mode" border-radius="10"></u-image>
+    <u-image :src="src" height="150rpx" width="260rpx" :mode="mode" border-radius="10"></u-image>
     <view class="goods-info">
-      <view class="goods-info-text u-line-2">
+      <view class="goods-info-text u-line-2" style="height: 65rpx;">
         <text class="g-text font-700 font-title">{{ title }}</text>
       </view>
     </view>
@@ -17,7 +17,7 @@
 	</view>
 	
     <view class="goods-price">
-      <text class="goods-price-strong text-red font-price">￥{{ price }}</text>
+      <text class="goods-price-strong text-red font-700 font-price">￥{{ price }}</text>
 	  <!-- <text class="goods-price-strong">{{ 55 }}</text> -->
 	  <text class="text-red-light font-up ml-1" v-if="item.spec_type">起</text>
 	  <!-- <text class="text-red-light font-20 ml-1" >起</text> -->
