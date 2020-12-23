@@ -521,7 +521,7 @@
 			<!-- 9 生活服务类专区 -->
 			<view class="goods-list" v-if="footMoreList[8].length > 0">
 				<view class="mx-2 d-flex j-sb a-end" style="height: 60rpx;">
-					<view class="position-relative" style="width: 350rpx;">
+					<view class="position-relative" style="width: 310rpx;">
 						<view class="d-flex bg-gradual-orange rounded-12 position-absolute bottom-0 left-0 w-100" style="height: 16rpx;"></view>
 						<view class="d-flex  position-absolute bottom-0 left-0 font-700 font-35">
 							⭐️ 生活服务类专区
@@ -580,7 +580,7 @@
 			<!-- 10 休闲娱乐专区 -->
 			<view class="goods-list" v-if="footMoreList[9].length > 0">
 				<view class="mx-2 d-flex j-sb a-end" style="height: 60rpx;">
-					<view class="position-relative" style="width: 350rpx;">
+					<view class="position-relative" style="width: 270rpx;">
 						<view class="d-flex bg-gradual-orange rounded-12 position-absolute bottom-0 left-0 w-100" style="height: 16rpx;"></view>
 						<view class="d-flex  position-absolute bottom-0 left-0 font-700 font-35">
 							⭐️ 休闲娱乐专区
@@ -795,7 +795,12 @@
 			
 			// this.getSeckillTime()
 			// this.showLottery()
+			// 获取数据
+			this.getIndexData()
+			this.getFootMore()
 			
+			this.getSeckillTime()
+			this.showLottery()
 			this.showLoading()
 			
 		},
@@ -810,12 +815,7 @@
 		// 	}
 		// },
 		onShow() {
-			// 获取数据
-			this.getIndexData()
-			this.getFootMore()
 			
-			this.getSeckillTime()
-			this.showLottery()
 			
 			
 			// this.cardSwiper1 = 0
@@ -978,6 +978,7 @@
 						this.hot = data.hot
 						this.tabsList = this.tabsList.concat(data.category)
 						// "全民疯抢" 那六个
+						console.log("首页分类：", data);
 						this.gridList = this.gridList.concat(data.menu)
 						// console.log("数据：", this.gridList);
 						// 这里去第一个 全民疯抢

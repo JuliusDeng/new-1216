@@ -368,6 +368,26 @@
                 })
               }, 1500)
             } else {
+				
+				if(res.data)
+					{
+					uni.showToast({
+					  title: '支付成功'
+					})	
+					
+					setTimeout(() => {
+					  this.$u.route({
+					    url: 'pages/user/order',
+					    params: {
+					      type: 0
+					    },
+					    type: 'redirectTo'
+					  })
+					}, 1500)
+					
+					return;
+					}
+				
               let config = res.data.result.config
               uni.requestPayment({
                 provider: 'wxpay',

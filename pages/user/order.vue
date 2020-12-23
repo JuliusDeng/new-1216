@@ -59,7 +59,7 @@
                       {{ ig.cart_info.product.store_name }}
                     </view>
 				    				<view class="delivery-time" v-if="!ig.is_refund">支付时间 {{ info.pay_time || '未支付' }}</view>
-				    				<view class="delivery-time red" v-else>退款中</view>
+				    				<view class="delivery-time red" v-else-if="info.status != -1">退款中</view>
 				    			</view>
 				    			<!-- <view class="right">
 				    				<view class="price">

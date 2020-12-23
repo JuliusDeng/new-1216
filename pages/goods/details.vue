@@ -281,7 +281,7 @@
               :color="!info.isRelation ? '#333' : '#ffdd00'"></u-icon>
             <view class="text u-line-1">收藏</view>
           </button>
-          <button class="item btn-item-share" @click="atShowShare = true">
+          <button class="item btn-item-share" @click="fenxiang">
             <u-icon name="share" size="40" color="#333"></u-icon>
             <view class="text u-line-1">分享</view>
           </button>
@@ -419,7 +419,7 @@
               <view class="grid-text u-margin-top-20">分享好友</view>
             </button>
           </u-grid-item>
-          <u-grid-item :border-bottom="false" @click="saveImage">
+          <u-grid-item :border-bottom="false" @click="saveImage(propic)">
             <u-icon name="download" :size="70" color="#999"></u-icon>
             <view class="grid-text u-margin-top-20">保存图片</view>
           </u-grid-item>
@@ -431,7 +431,7 @@
     </u-popup>
     <!-- 海报 -->
     <view class="share-fixed" v-if="atShowShare">
-      <image src="/static/wechat.jpg" mode="aspectFit" class="share-image"></image>
+      <image :src="propic" mode="aspectFit" class="share-image"></image>
     </view>
 	</view>
 </template>
@@ -454,7 +454,8 @@
         typeText: ['店铺券', '商品券', '品类券'],
         timestamp: 0,
         atShowShare: false,
-        uid: ''
+        uid: '',
+		propic :''
 			};
 		},
     computed: {
@@ -492,9 +493,9 @@
     },
     methods: {
       // 保存图片
-      saveImage () {
+      saveImage (url) {
         uni.saveImageToPhotosAlbum({
-          filePath: '/static/chat.png',
+          filePath: url,
           success: () => {
             uni.showToast({
               title: '保存成功'
@@ -641,7 +642,20 @@
       },
       toRoute (params) {
         this.$u.route(params)
-      }
+      },
+	  fenxiang(){
+		  
+	uni.showLoading({
+		title: '生成中...请稍后',
+	});
+		  
+		    this.$u.get(`/api/store/product/qrcode/${this.id}`, {
+		  			    type: 'routine'}) .then(({ data }) => {
+							this.propic = data.url;
+							this.atShowShare = true;
+			})
+			}
+	  
     }
 	}
 </script>
