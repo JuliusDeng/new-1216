@@ -1,5 +1,5 @@
 <template>
-	<view class="goods-list page">
+	<view class="goods-list page h-vh100">
 		<view class="tabulation-box">
 			<view class="d-flex j-center a-center font-700 font-35">
 				<!-- <text class="text-yellow">⭐️</text> {{title}} <text class="text-yellow">⭐️</text> -->
@@ -41,7 +41,7 @@
 				</view>
 				
 				
-				<view class="u-padding-30">
+				<view class="u-padding-30 bg-main">
 					<u-loadmore :status="loadStatus" />
 				</view>
 			</template>

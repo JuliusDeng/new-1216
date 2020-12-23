@@ -57,7 +57,7 @@
 			</view>
 		</view>
 		<template v-if="userInfo.group_id < 1">
-			<view class="mx-3 my-5 py-1  d-flex a-center j-center bg-yellow rounded-28" @click="upStar">
+			<view class="mx-3 my-5 py-2  d-flex a-center j-center bg-yellow rounded-36" @click="upStar">
 				立即开通 ¥{{ info.group ? (info.group.needmoney * nowSeltVip).toFixed(2) : '' }}
 			</view>
 			<!-- <u-button type="warning" shape="circle" ripple :custom-style="{color: '#333'}" @click="upStar">立即开通 ¥{{ info.group ? (info.group.needmoney * nowSeltVip).toFixed(2) : '' }}</u-button> -->
