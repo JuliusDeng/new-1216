@@ -57,10 +57,9 @@
 			</view>
 		</view>
 		<template v-if="userInfo.group_id < 1">
-			<view class="mx-3 my-5 py-1  d-flex a-center j-center bg-yellow rounded-28" @click="upStar">
-				立即开通 ¥{{ info.group ? (info.group.needmoney * nowSeltVip).toFixed(2) : '' }}
+			<view class="update">
+				<u-button type="warning" shape="circle" ripple :custom-style="{color: '#333'}" @click="upStar">立即开通 ¥{{ info.group ? (info.group.needmoney * nowSeltVip).toFixed(2) : '' }}</u-button>
 			</view>
-			<!-- <u-button type="warning" shape="circle" ripple :custom-style="{color: '#333'}" @click="upStar">立即开通 ¥{{ info.group ? (info.group.needmoney * nowSeltVip).toFixed(2) : '' }}</u-button> -->
 			<text class="tip" @tap="showWriteCode = true">使用激活码兑换</text>
 		</template>
 		<template v-else>
@@ -80,44 +79,25 @@
 		
 		
 		<!-- 会员特权 -->
-		<view class="d-flex  j-center px-3 mt-5 mb-3 pt-4">
-			<view class="position-relative"  style="width: 190rpx;">
-				<view class="d-flex bg-yellow rounded-12 position-absolute bottom-0 left-0 w-100"
-				style="height: 16rpx;width: 190rpx;"></view>	
-				<view class="d-flex j-center position-absolute bottom-0 left-0 font-700 font-35" 
-				style="width: 190rpx;">
-					会员特权
-				</view>
-			</view>
+		<view class="main-title">
+			<text>会员特权</text>
 		</view>
-		<view class=" px-5 d-flex a-center mb-2" v-for="(item, index) in member" :key="index">
-			<view class="ml-3 ">
+
+		<view class="privilege" v-if="info.data">
+			<view class="privilege-item" v-for="(item, index) in info.data" :key="index" hover-class="hover" @click="privilegeClick(index)">
 				<u-icon :name="item.img" size="60"></u-icon>
-			</view>
-			<view class="ml-2 ">
-				<view class="font-700 font-25 ">{{item.title.split("：")[0]}}</view>
-				<view class="text-ellipsis font-20 text-muted" style="width: 570rpx;">{{item.title.split("：")[1]}}</view>	
-				
+				<text class="privilege-item-text u-margin-top-10">{{ item.title }}</text>
 			</view>
 		</view>
-		<!-- 会员说明 -->
-		<view class="d-flex j-center px-5 pt-5 mb-3">
-			<view class="position-relative"  style="width: 190rpx;">
-				<view class="d-flex bg-yellow rounded-12 position-absolute bottom-0 left-0 w-100"
-				style="height: 16rpx;width: 190rpx;"></view>	
-				<view class="d-flex j-center position-absolute bottom-0 left-0 font-700 font-35" 
-				style="width: 190rpx;">
-					会员说明
-				</view>
-			</view>
+
+
+		<view class="main-title">
+			<text>会员说明</text>
 		</view>
-		<view class="px-5 mb-3">
-			<view class="font-25 text-muted">
-				{{ info.explain || '' }}
-			</view>
+
+		<view class="explain-box">
+			{{ info.explain || '' }}
 		</view>
-		
-		
 
 		<view class="level">
 			<view class="level-rate">
@@ -166,7 +146,7 @@
 		<u-modal v-model="showWriteCode" title="激活码激活" ref="uModal" show-cancel-button confirm-color="#e1aa1b" :async-close="true"
 		 @confirm="confirmWriteCode">
 			<view class="u-padding-20">
-				<u-input placeholder="请输入激活码" v-model="inCode" :border="true" maxlength="16"></u-input>
+				<u-input placeholder="请输入激活码" v-model="inCode"></u-input>
 			</view>
 		</u-modal>
 	</view>
@@ -229,8 +209,7 @@
 						text: '专属客服'
 					}
 				],
-				aSeltVipList: [1, 3, 12],
-				member: []
+				aSeltVipList: [1, 3, 12]
 			}
 		},
 		computed: {
@@ -309,12 +288,6 @@
 					.then(({
 						data
 					}) => {
-						console.log(data);
-						this.member = data.data
-						// let _msg = data.data
-						// this.member = _msg.map((e) => e.title.split("："))
-						// console.log("处理后会员：", this.member);
-						
 						this.info = data
 						this.user = data.user
 						uni.setStorage({
@@ -386,8 +359,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
-	@import "/common/dev-yuchen.css";
+<style lang="scss">
 	.page {
 		background-color: #f0f0f0;
 	}

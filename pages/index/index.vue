@@ -360,7 +360,7 @@
 			<!-- 6 烤肉|烤鱼|烧烤吃不腻 本周上新 -->
 			<view class="goods-list" v-if="footMoreList[5].length > 0">
 				<view class="mx-2 d-flex j-sb a-end" style="height: 60rpx;">
-					<view class="position-relative" style="width: 350rpx;">
+					<view class="position-relative" style="width: 396rpx;">
 						<view class="d-flex bg-gradual-orange rounded-12 position-absolute bottom-0 left-0 w-100" style="height: 16rpx;"></view>
 						<view class="d-flex  position-absolute bottom-0 left-0 font-700 font-35">
 							⭐️ 烤肉|烤鱼|烧烤吃不腻

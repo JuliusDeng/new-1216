@@ -1,46 +1,22 @@
 <template>
-	<view class="goods-list page">
+	<view class="goods-list">
 		<view class="tabulation-box">
-			<view class="d-flex j-center a-center font-700 font-35">
-				<!-- <text class="text-yellow">⭐️</text> {{title}} <text class="text-yellow">⭐️</text> -->
-				<view class="text-yellow d-flex a-center">⭐️</view>
-				<view class="d-flex a-center">{{title}}</view>
-				<view class="text-yellow d-flex a-center">⭐️</view>
+			<view class="tabulation-more">
+				<u-section :title="title" :right="false" :show-line="false" :bold="false" font-size="36"></u-section>
 			</view>
 			<template v-if="list.length || loadStatus != 'nomore'">
-				
-				<view class="px-2 pt-2 d-flex j-sb flex-wrap page">
-					<view class="mb-2  rounded-12 bg-white" style="width: 340rpx;height: 390rpx;"
-					v-for="(item, index) in list" :key="index" @click="toRoute({
-						url: 'pages/goods/details',
-						params: {
-						  id: item.product_id
-						}
-					})">
-						<image :src="item.image" style="width: 340rpx;height: 190rpx;" class=""></image>
-						<view class="text-elli-two font-700 font-title my-1 ml-1" style="height: 80rpx;">{{item.store_name}}</view>
-						<!-- 190 + 80 + 20 = 290 -->
-					
-						<view class="d-flex j-sb " style="height: 95rpx;">
-							<view class="ml-1">
-								<!-- 32rpx -->
-								<member v-if="item.vip_price">会员省{{ (item.price - item.vip_price).toFixed(2) }}元</member>
-								<!-- 40rpx -->
-								<view class="d-flex a-center font-20 mb-2" style="height: 40rpx;">
-									<text class="text-red font-700 font-price mr-1 ">￥{{item.price}}</text>
-									<text class="text-red-light font-up mr-1" v-if="item.spec_type">起</text>
-									<!-- <text class="text-red-light font-up mr-1">起</text> -->
-									<!-- 原价 -->
-									<text class="text-through text-muted mr-1 font-ago">￥{{item.ot_price}}</text>
-								</view>
-					
-							</view>
-						</view>
-						
+				<view class="goods-inbox">
+					<view class="goods-initem" v-for="(item, index) in list" :key="index" @click="toRoute({
+              url: 'pages/goods/details',
+              params: {
+                id: item.product_id
+              }
+            })">
+						<goods-item :src="item.image" :title="item.store_name" :price="item.price" :o-price="item.ot_price" :show-btn="false"
+						 :right-text="`已售 ${item.sales}`">
+						</goods-item>
 					</view>
 				</view>
-				
-				
 				<view class="u-padding-30">
 					<u-loadmore :status="loadStatus" />
 				</view>
@@ -55,16 +31,7 @@
 </template>
 
 <script>
-	import Arrow from '@/components/index/arrow.vue';
-	import Member from '@/components/index/member.vue';
-	import BottomBuy from '@/components/index/bottom-buy.vue';
-	
 	export default {
-		components: {
-			Arrow,
-			Member,
-			BottomBuy
-		},
 		data() {
 			return {
 				loadStatus: 'loadmore',
@@ -141,10 +108,9 @@
 	}
 </script>
 
-<style lang="scss" scoped>
-	@import "/common/dev-yuchen.css";
-	.page {
-		background-color: #f0f0f0;
+<style lang="scss">
+	page {
+		background-color: $bg;
 	}
 
 	.goods-list {
