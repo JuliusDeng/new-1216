@@ -61,7 +61,7 @@
 				立即开通 ¥{{ info.group ? (info.group.needmoney * nowSeltVip).toFixed(2) : '' }}
 			</view>
 			<!-- <u-button type="warning" shape="circle" ripple :custom-style="{color: '#333'}" @click="upStar">立即开通 ¥{{ info.group ? (info.group.needmoney * nowSeltVip).toFixed(2) : '' }}</u-button> -->
-			<text class="tip" @tap="showWriteCode = true">使用激活码兑换</text>
+			<text class="tip font-26" @tap="showWriteCode = true">使用激活码兑换</text>
 		</template>
 		<template v-else>
 			<view class="update" v-if="hasLogin">
@@ -95,8 +95,8 @@
 				<u-icon :name="item.img" size="60"></u-icon>
 			</view>
 			<view class="ml-2 ">
-				<view class="font-700 font-25 ">{{item.title.split("：")[0]}}</view>
-				<view class="text-ellipsis font-20 text-muted" style="width: 570rpx;">{{item.title.split("：")[1]}}</view>	
+				<view class="font-700 font-28 ">{{item.title.split("：")[0]}}</view>
+				<view class="text-ellipsis font-26 text-muted" style="width: 570rpx;">{{item.title.split("：")[1]}}</view>	
 				
 			</view>
 		</view>
@@ -112,7 +112,7 @@
 			</view>
 		</view>
 		<view class="px-5 mb-3">
-			<view class="font-25 text-muted">
+			<view class="font-26 text-muted">
 				{{ info.explain || '' }}
 			</view>
 		</view>
