@@ -1,11 +1,15 @@
 <template>
 	<view class="goods-list page h-vh100">
 		<view class="tabulation-box">
-			<view class="d-flex j-center a-center font-700 font-35">
+			<view class="d-flex j-center a-center px-2 position-relative font-700 font-35">
 				<!-- <text class="text-yellow">⭐️</text> {{title}} <text class="text-yellow">⭐️</text> -->
-				<view class="text-yellow d-flex a-center">⭐️</view>
+			<!-- 	<view class="text-yellow d-flex a-center">⭐️</view>
 				<view class="d-flex a-center">{{title}}</view>
-				<view class="text-yellow d-flex a-center">⭐️</view>
+				<view class="text-yellow d-flex a-center">⭐️</view> -->
+				<image src="../../static/bg02.png" mode="" style="width: 750rpx;height: 80rpx;"></image>
+				<view class="position-absolute top-0 " style="padding-top: 15rpx;">
+					必吃美食 优选进口
+				</view>
 			</view>
 			<template v-if="list.length || loadStatus != 'nomore'">
 				
