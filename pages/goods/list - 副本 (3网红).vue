@@ -74,16 +74,10 @@
 				brand_id: '',
 				price_on: '',
 				price_off: '',
-				cate_id: '',
-				
-				// 检查 pid
-				pid: ""
+				cate_id: ''
 			};
 		},
 		onLoad(options) {
-			
-			this.pid = options.pid
-			
 			console.log("list页面：", options);
 			this.title = options.title
 			this.type = options.type
@@ -120,12 +114,6 @@
 				if (this.hot_type) {
 					params.hot_type = this.hot_type
 				}
-				if (this.pid) {
-					params.pid = this.pid
-				}
-				
-				
-				
 				if (this.loadStatus == 'loadmore') {
 					this.loadStatus = 'loading'
 					this.$u.get('/api/store/product/lst', {

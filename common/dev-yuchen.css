@@ -97,6 +97,7 @@ body{
 .font-32 { font-size: 32rpx;}
 .font-33 { font-size: 33rpx;}
 .font-35 { font-size: 35rpx;}
+.font-37 { font-size: 37rpx;}
 .font-40 { font-size: 40rpx;}
 .font-48{ font-size: 48rpx; }
 .font-60{ font-size: 60rpx; }
@@ -791,13 +792,13 @@ body{
 .font-nav{ font-size: 28rpx; } 
 
 /* 标题 */
-.font-title{ font-size: 30rpx; }
+.font-title{ font-size: 28rpx; }
 
 /* 会员省 */
 .font-member{ font-size: 22rpx; }
 
 /* 价格 */
-.font-price{ font-size: 32rpx; }
+.font-price{ font-size: 28rpx; }
 
 /* "起"字 */
 .font-up{ font-size: 24rpx; }

@@ -1,10 +1,11 @@
 <template>
-	<view class="border-dark d-flex " :class="mtop" style="width: 200rpx;height: 32rpx; ">
-	<!-- <view class="border-dark d-flex " :class="mtop" style="height: 32rpx; ">	 -->
-		<text class="font-20 font-700 d-flex j-center" style="background: #403835;width: 36rpx;color: #efaa89;">V</text>
-		<text class="font-member text-dark d-flex a-center j-center w-100">
+	<view class="d-flex">
+		<view class="pl-1  font-20 font-700 "
+		style="background: #403835;width: 36rpx;height: 32rpx;line-height: 32rpx; color: #efaa89;display: inline-block;">V</view>
+		<view class="px-1 font-member border-dark text-dark " 
+		style="height: 32rpx;line-height: 28rpx;display: inline-block;">
 			<slot></slot>
-		</text>
+		</view>
 	</view>
 </template>
 
