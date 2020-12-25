@@ -785,6 +785,33 @@
 				<u-loadmore :status="loadStatus"></u-loadmore>
 			</view>
 		</template>
+		<!-- 弹出层广告 -->
+		<u-mask :show="showReindex && footMoreList[1]">
+		  <view class="re-index">
+		    <image src="/static/fixbg.png" mode="aspectFit" class="re-bg"></image>
+		    <view class="re-content">
+		      <view class="re-item">
+		        <view class="re-img">
+		          <u-image :src="footMoreList[1][0].image" width="100%" height="100%" />
+		        </view>
+		        <view class="re-right">
+		          <text class="re-title u-line-2">{{ footMoreList[1][0].store_name }}</text>
+		          <view class="re-bot">
+		            <text class="re-price">¥{{ footMoreList[1][0].price }}</text>
+		            <text class="re-small">已有{{ footMoreList[1][0].sales }}人抢购</text>
+		          </view>
+		        </view>
+		      </view>
+		    </view>
+		    <view class="button-text" @click="toDetails(footMoreList[1][0])">
+		      <text>立即抢购</text>
+		    </view>
+		    <view class="re-hide" >
+		      <u-icon name="close-circle" size="60" color="rgba(255, 255, 255, .8)" @click="close()"></u-icon>
+		    </view>
+		  </view>
+		</u-mask>
+		
 
 	</view>
 </template>
@@ -892,6 +919,10 @@
 			// this.cardSwiper2 = 0
 		},
 		methods: {
+			close() {
+				this.showReindex = false
+			},
+			
 			showLoading() {
 				uni.showLoading({
 				    title: '加载中',
